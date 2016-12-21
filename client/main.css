@@ -1,1 +1,11 @@
-/* CSS declarations go here */
+.buttons {
+  text-align: center;
+}
+
+.btn-custom {
+	width: 10em;
+}
+.tip {
+	color: green;
+	font-size: 10px
+}

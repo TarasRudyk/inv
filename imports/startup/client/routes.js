@@ -8,6 +8,7 @@ import Invoice from '/imports/ui/containers/pages/invoice';
 import Billers from '/imports/ui/containers/pages/billers';
 import Customers from '/imports/ui/containers/pages/customers';
 import Products from '/imports/ui/containers/pages/products';
+import Addcustomer from '/imports/ui/containers/pages/addcustomer';
 
 FlowRouter.route('/', {
   action() {
@@ -37,6 +38,14 @@ FlowRouter.route('/products', {
   action() {
     mount(MainLayout, {
       content: <Products />
+    });
+  }
+});
+
+FlowRouter.route('/customers/add', {
+  action() {
+    mount(MainLayout, {
+      content: <Addcustomer />
     });
   }
 });
