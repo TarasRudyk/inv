@@ -42,10 +42,18 @@ FlowRouter.route('/products', {
   }
 });
 
-FlowRouter.route('/customers/add', {
+FlowRouter.route('/customers/addcustomer', {
   action() {
     mount(MainLayout, {
       content: <Addcustomer />
+    });
+  }
+});
+
+FlowRouter.route('/customers/addcustomer/:id', {
+  action(params) {
+    mount(MainLayout, {
+      content: <Addcustomer {...params}/>
     });
   }
 });

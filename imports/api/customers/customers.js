@@ -10,7 +10,10 @@ Customers.deny({
 });
 
 Customers.schema = new SimpleSchema({
-  name: {
+  Id: {
+    type: Number
+  },
+  customerName: {
     type: String,
     regEx: /^[a-zA-Z_]{2,25}$/
   },
@@ -29,10 +32,11 @@ Customers.schema = new SimpleSchema({
   },
   'address.state': {
     type: String,
-    optional: true
+    optional: true,
   },
   'address.zip': {
     type: Number,
+    regEx: SimpleSchema.RegEx.ZipCode,
     optional: true
   },
   'address.country': {
@@ -43,14 +47,14 @@ Customers.schema = new SimpleSchema({
     type: Object
   },
   'contacts.phone': {
-    type: String
+    type: Number
   },
-  'contacts.mob': {
-    type: String,
+  'contacts.mobile': {
+    type: Number,
     optional: true
   },
   'contacts.fax': {
-    type: String,
+    type: Number,
     optional: true
   },
   'contacts.email': {
@@ -66,6 +70,9 @@ Customers.schema = new SimpleSchema({
     autoValue() {
       return new Date();
     }
+  },
+  exist: {
+    type: String,
   },
 
 });

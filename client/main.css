@@ -9,3 +9,23 @@
 	color: green;
 	font-size: 10px
 }
+body {
+	background-color: #E6E6FA
+}
+.nav:link, .nav:visited {
+	margin: 5px;
+	margin-bottom: 15px;
+    background-color: #5F9EA0;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav:hover, .nav:active {
+    background-color: #6495ED;
+}
+.addcustomer{
+    align: center;
+}

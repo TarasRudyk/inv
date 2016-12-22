@@ -4,7 +4,7 @@ import './methods'
 
 
 export const createCustomer=(
-	name, 
+	customerName, 
 	customerContact, 
 	address, 
 	state, 
@@ -12,10 +12,11 @@ export const createCustomer=(
 	zip, 
 	country, 
 	phone, 
-	mob, 
+	mobile, 
 	fax, 
 	email, 
 	notes,
+	exist
 	) => {
 	address = {
     address,
@@ -26,13 +27,56 @@ export const createCustomer=(
 	};
 	contacts = {
     phone,
-    mob,
+    mobile,
     fax,
     email,
-  }
-	return Meteor.call('customersCreate', name, customerContact, address, contacts, notes, (err) => {
+  };
+	return Meteor.call('customersCreate', customerName, customerContact, address, contacts, notes, exist, (err) => {
 		if(err) {
-			Bert.alert('Fill up required fields', 'danger', 'fixed-top', 'fa-frown-o')
+			Bert.alert(err.reason + ' the customer hasn\'t been added', 'danger', 'fixed-top', 'fa-frown-o');
+		}else{
+			Bert.alert('The customer is added successfully', 'success', 'fixed-top', 'fa-frown-o');
+			FlowRouter.go('/')
+		}
+	})
+
+};
+
+export const editCustomer = (
+	Id,
+	customerName, 
+	customerContact, 
+	address, 
+	state, 
+	city, 
+	zip, 
+	country, 
+	phone, 
+	mobile, 
+	fax, 
+	email, 
+	notes,
+	exist
+	) => {
+	address = {
+    address,
+    state, 	
+    city, 
+    zip,
+    country,  
+	};
+	contacts = {
+    phone,
+    mobile,
+    fax,
+    email,
+  };
+	return Meteor.call('editCreate', Id, customerName, customerContact, address, contacts, notes, exist, (err) => {
+		if(err) {
+			Bert.alert(err.reason + ' the customer hasn\'t been edited', 'danger', 'fixed-top', 'fa-frown-o');
+		}else{
+			Bert.alert('The customer is edited successfully', 'success', 'fixed-top', 'fa-frown-o');
+			FlowRouter.go('/')
 		}
 	})
 

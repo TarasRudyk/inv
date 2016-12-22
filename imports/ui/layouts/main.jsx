@@ -18,25 +18,31 @@ export default class MainLayout extends React.Component {
   render() {
     return (
       <div className="app">
-      <Tabs onSelect={this.handleSelect}>
-        <TabList>
-          <Tab>Money</Tab>
-          <Tab>People</Tab>
-          <Tab>Products</Tab>
-        </TabList>
-        <TabPanel>
-          <span><a href="/">Invoice </a> \</span>
-          <span>New invoice</span>
-        </TabPanel>
-        <TabPanel>
-          <span><a href="/customers">Customer</a></span>
-          <span><a href="/billers">Biller</a></span>
-        </TabPanel>
-        <TabPanel>
-          <span><a href="/products">Add product</a></span>
-        </TabPanel>
-      </Tabs>
-        {this.props.content}
+        <div className="container">
+          <div className="row">
+            <Tabs onSelect={this.handleSelect}>
+              <TabList>
+                <Tab>Money</Tab>
+                <Tab>People</Tab>
+                <Tab>Products</Tab>
+              </TabList>
+              <TabPanel>
+                <span><a role="button" className="nav" href="/">Invoices </a></span>
+                <span><a role="button" className="nav" href="/addinvoice">Add New Invoice</a></span>
+              </TabPanel>
+              <TabPanel>
+                <span><a role="button" className="nav" href="/customers">Customer</a></span>
+                <span><a role="button" className="nav" href="/billers">Biller</a></span>
+                <span><a role="button" className="nav" href="/customers/addcustomer">Add New Customer</a></span>
+                <span><a role="button" className="nav" href="/customers/addbiller">Add New Biller</a></span>
+              </TabPanel>
+              <TabPanel>
+                <span><a className="nav" href="/products">Add product</a></span>
+              </TabPanel>
+            </Tabs>
+            {this.props.content}
+          </div>
+        </div>
       </div>
     );
   }
