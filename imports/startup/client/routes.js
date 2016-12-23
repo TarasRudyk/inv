@@ -4,16 +4,39 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 import MainLayout from '/imports/ui/layouts/main';
-import Invoice from '/imports/ui/containers/pages/invoice';
+
+import Invoices from '/imports/ui/containers/pages/invoices';
+import Addinvoice from '/imports/ui/containers/pages/addinvoice';
+
 import Billers from '/imports/ui/containers/pages/billers';
-import Customers from '/imports/ui/containers/pages/customers';
+import Addbiller from '/imports/ui/containers/pages/addbiller';
+
 import Products from '/imports/ui/containers/pages/products';
+import Addproduct from '/imports/ui/containers/pages/addproduct';
+
+import Customers from '/imports/ui/containers/pages/customers';
 import Addcustomer from '/imports/ui/containers/pages/addcustomer';
 
 FlowRouter.route('/', {
   action() {
     mount(MainLayout, {
-      content: <Invoice />
+      content: <Invoices />
+    });
+  }
+});
+
+FlowRouter.route('/addinvoice', {
+  action() {
+    mount(MainLayout, {
+      content: <Addinvoice />
+    });
+  }
+});
+
+FlowRouter.route('/addinvoice/:id', {
+  action(params) {
+    mount(MainLayout, {
+      content: <AddInvoice {...params}/>
     });
   }
 });
@@ -26,10 +49,18 @@ FlowRouter.route('/billers', {
   }
 });
 
-FlowRouter.route('/customers', {
+FlowRouter.route('/billers/addbiller', {
   action() {
     mount(MainLayout, {
-      content: <Customers />
+      content: <Addbiller />
+    });
+  }
+});
+
+FlowRouter.route('/billers/addbiller/:id', {
+  action(params) {
+    mount(MainLayout, {
+      content: <Addbiller {...params}  />
     });
   }
 });
@@ -41,6 +72,31 @@ FlowRouter.route('/products', {
     });
   }
 });
+
+FlowRouter.route('/products/addproduct', {
+  action() {
+    mount(MainLayout, {
+      content: <Addproduct />
+    });
+  }
+});
+
+FlowRouter.route('/products/addproduct/:id', {
+  action(params) {
+    mount(MainLayout, {
+      content: <Addproduct {...params}/>
+    });
+  }
+});
+
+FlowRouter.route('/customers', {
+  action() {
+    mount(MainLayout, {
+      content: <Customers />
+    });
+  }
+});
+
 
 FlowRouter.route('/customers/addcustomer', {
   action() {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Invoice extends React.Component {
+export default class Invoices extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};

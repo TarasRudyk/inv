@@ -29,3 +29,15 @@ body {
 .addcustomer{
     align: center;
 }
+select {
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #5F9EA0;
+    color: white;
+    padding: 10px 20px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+    border:0px;
+    outline:0px;
+}

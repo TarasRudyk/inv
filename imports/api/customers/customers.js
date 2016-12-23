@@ -23,7 +23,7 @@ Customers.schema = new SimpleSchema({
   address: {
     type: Object
   },
-  'address.address': {
+  'address.street': {
     type: String,
     optional: true
   },
@@ -71,8 +71,8 @@ Customers.schema = new SimpleSchema({
       return new Date();
     }
   },
-  exist: {
-    type: String,
+  enabled: {
+    type: Boolean,
   },
 
 });

@@ -1,2 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+
+import { Products } from '../products';
+
+Meteor.publish('products', function () {
+	
+  return Products.find({});
+});
+

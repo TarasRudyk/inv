@@ -31,13 +31,14 @@ export default class MainLayout extends React.Component {
                 <span><a role="button" className="nav" href="/addinvoice">Add New Invoice</a></span>
               </TabPanel>
               <TabPanel>
-                <span><a role="button" className="nav" href="/customers">Customer</a></span>
-                <span><a role="button" className="nav" href="/billers">Biller</a></span>
+                <span><a role="button" className="nav" href="/customers">Customers</a></span>
+                <span><a role="button" className="nav" href="/billers">Billers</a></span>
                 <span><a role="button" className="nav" href="/customers/addcustomer">Add New Customer</a></span>
-                <span><a role="button" className="nav" href="/customers/addbiller">Add New Biller</a></span>
+                <span><a role="button" className="nav" href="/billers/addbiller">Add New Biller</a></span>
               </TabPanel>
               <TabPanel>
-                <span><a className="nav" href="/products">Add product</a></span>
+                <span><a className="nav" href="/products">Products</a></span>
+                <span><a className="nav" href="/products/addproduct">Add New Product</a></span>
               </TabPanel>
             </Tabs>
             {this.props.content}

@@ -7,7 +7,7 @@ export default class Addcustomer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	exist: "Enabled",
+    	enabled: 'true',
     	customer: this.props.customer
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,35 +19,26 @@ export default class Addcustomer extends React.Component {
   onSubmit(event) {
     event.preventDefault();
 
-		const customerName = this.refs.customerName.value.trim();
-		const customerContact = this.refs.customerContact.value.trim();
-		const address = this.refs.straddress.value.trim();
-		const state =this.refs.state.value.trim();
-		const city = this.refs.city.value.trim();
-		const zip = this.refs.zip.value.trim();
-		const country = this.refs.country.value;
-		const phone = this.refs.phone.value.trim();
-		const mobile = this.refs.mob.value.trim();
-		const fax = this.refs.fax.value.trim();
-		const email = this.refs.email.value.trim();
-		const notes = this.refs.notes.value.trim();
-		const exist = this.state.exist;
+    const customer = {
+    	customerName: this.refs.customerName.value.trim(),
+			customerContact: this.refs.customerContact.value.trim(),
+			address: {
+				street: this.refs.state.value.trim(),
+				city: this.refs.city.value.trim(),
+				zip: this.refs.zip.value.trim(),
+				country: this.refs.country.value,
+			},
+			contacts: {
+				phone: this.refs.phone.value.trim(),
+				mobile: this.refs.mob.value.trim(),
+				fax: this.refs.fax.value.trim(),
+				email: this.refs.email.value.trim(),
+			},
+			notes: this.refs.notes.value.trim(),
+			enabled: this.state.enabled
+    };
 
-	  createCustomer(
-	    customerName,
-			customerContact,
-			address,
-			state,
-			city,
-			zip,
-			country,	     
-			phone,
-			mobile,
-			fax,
-			email,
-			notes,
-			exist
-	  	)
+	  createCustomer(customer);
   };
 
   onCancel() {
@@ -63,48 +54,39 @@ export default class Addcustomer extends React.Component {
 		this.refs.fax.value = "";
 		this.refs.email.value = "";
 		this.refs.notes.value = "";
-  }
+  };
 
   handleChange(e) {
-  	this.setState({ exist: e.target.value })
-	}
+  	this.setState({ enabled: e.target.value })
+	};
 
 	onEdit() {
 		const Id = this.state.customer._id;
-		const customerName = this.refs.customerName.value.trim();
-		const customerContact = this.refs.customerContact.value.trim();
-		const address = this.refs.straddress.value.trim();
-		const state =this.refs.state.value.trim();
-		const city = this.refs.city.value.trim();
-		const zip = this.refs.zip.value.trim();
-		const country = this.refs.country.value;
-		const phone = this.refs.phone.value.trim();
-		const mobile = this.refs.mob.value.trim();
-		const fax = this.refs.fax.value.trim();
-		const email = this.refs.email.value.trim();
-		const notes = this.refs.notes.value.trim();
-		const exist = this.state.exist;
+    const customer = {
+    	customerName: this.refs.customerName.value.trim(),
+			customerContact: this.refs.customerContact.value.trim(),
+			address: {
+				street: this.refs.state.value.trim(),
+				city: this.refs.city.value.trim(),
+				zip: this.refs.zip.value.trim(),
+				country: this.refs.country.value,
+			},
+			contacts: {
+				phone: this.refs.phone.value.trim(),
+				mobile: this.refs.mob.value.trim(),
+				fax: this.refs.fax.value.trim(),
+				email: this.refs.email.value.trim(),
+			},
+			notes: this.refs.notes.value.trim(),
+			enabled: this.state.enabled
+    };
 
-	  editCustomer(
-	  	Id,
-	    customerName,
-			customerContact,
-			address,
-			state,
-			city,
-			zip,
-			country,	     
-			phone,
-			mobile,
-			fax,
-			email,
-			notes,
-			exist
-	  	)
-	}
+	  editCustomer(Id, customer);
+	};
 
   render() {
   	const { customer } = this.state;
+  	const ObjLength = customer ? Object.keys(customer).length : null;
 
     return (
 			<div className="container">
@@ -114,7 +96,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="name" className="col-sm-3 control-label">* Customer name:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="text" ref="customerName" id="name" 
 								defaultValue={customer.customerName} /> :
 							<input className="form-control" type="text" ref="customerName" id="name" />
@@ -126,7 +108,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="contact" className="col-sm-3 control-label" >* Customer Contact (Attn):</label>
 						<div className="col-sm-6">
-						{ customer ?
+						{ ObjLength ?
 							<input className="form-control" type="text" ref="customerContact" id="contact" 
 								defaultValue={customer.customerContact} /> :
 							<input className="form-control" type="text" ref="customerContact" id="contact" />
@@ -137,9 +119,9 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">	
 						<label htmlFor="address" className="col-sm-3 control-label">Street address:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="text" ref="straddress" id="straddress" 
-								defaultValue={customer.address.address} /> :
+								defaultValue={customer.address.street} /> :
 							<input className="form-control" type="text" ref="straddress" id="straddress" />
 						}
 						</div>
@@ -148,7 +130,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="city" className="col-sm-3 control-label" >* City:</label>
 						<div className="col-sm-6">
-						{ customer ?
+						{ ObjLength ?
 							<input className="form-control" type="text" ref="city" id="city"
 								defaultValue={customer.address.city} /> : 
 							<input className="form-control" type="text" ref="city" id="city" />
@@ -159,7 +141,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="state" className="col-sm-3 control-label">State:</label>
 						<div className="col-sm-6">
-						{ customer ?
+						{ ObjLength ?
 							<input className="form-control" type="text" ref="state" id="state" 
 								defaultValue={customer.address.state} /> :
 							<input className="form-control" type="text" ref="state" id="state" /> 
@@ -170,7 +152,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="zip" className="col-sm-3 control-label">Zip code:</label>
 						<div className="col-sm-6">
-						{ customer ?
+						{ ObjLength ?
 							<input className="form-control" type="text" ref="zip" id="zip" 
 							 	defaultValue={customer.address.zip} /> :
 						  <input className="form-control" type="text" ref="zip" id="zip" />
@@ -182,7 +164,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="country" className="col-sm-3 control-label">Country:</label>
 						<div className="col-sm-6">
-						{ customer ?
+						{ ObjLength ?
 							<input className="form-control" type="text" ref="country" id="country" 
 								defaultValue={customer.address.country} /> :
 							<input className="form-control" type="text" ref="country" id="country" />
@@ -193,7 +175,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="phone" className="col-sm-3 control-label" >* Phone:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="text" ref="phone" id="phone" 
 								defaultValue={customer.contacts.phone} /> :
 							<input className="form-control" type="text" ref="phone" id="phone" />
@@ -205,7 +187,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="mob" className="col-sm-3 control-label" >Mobile:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="text" ref="mob" id="mob" 
 								defaultValue={customer.contacts.mobile} /> :
 							<input className="form-control" type="text" ref="mob" id="mob" />
@@ -217,7 +199,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="fax" className="col-sm-3 control-label" >Fax:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="text" ref="fax" id="fax" 
 								defaultValue={customer.contacts.fax} /> :
 							<input className="form-control" type="text" ref="fax" id="fax" />
@@ -229,7 +211,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="email" className="col-sm-3 control-label">* Email:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<input className="form-control" type="email" ref="email" id="email" 
 								defaultValue={customer.contacts.email} /> : 
 							<input className="form-control" type="email" ref="email" id="email" />
@@ -240,7 +222,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="notes" className="col-sm-3 control-label">Notes:</label>
 						<div className="col-sm-6">
-						{ customer ? 
+						{ ObjLength ? 
 							<textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" 
 								defaultValue={customer.notess} /> :
 							<textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" />
@@ -252,8 +234,8 @@ export default class Addcustomer extends React.Component {
 						<div className="col-sm-3"></div>
 						<div className="col-sm-6">
             <select onChange={this.handleChange	}>
-              <option value="Enabled" default>Enabled</option>
-              <option value="Disabled" >Disabled</option>
+              <option value={true} default>Enabled</option>
+              <option value={false}>Disabled</option>
             </select>
 						</div>
 					</div>

@@ -1,11 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import Products from '/imports/ui/pages/products';
+import { Products } from '/imports/api/products/products';
+
+import ProductsList from '/imports/ui/pages/products';
 
 export default createContainer(() => {
 
-  return {
+	const productsHandle = Meteor.subscribe('products');
+	const products = productsHandle.ready() ? Products.find().fetch() : [];
 
+  return {
+  	products,
   };
-}, Products);
+}, ProductsList);

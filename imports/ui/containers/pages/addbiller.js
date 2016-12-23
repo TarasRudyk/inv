@@ -1,11 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import Invoice from '/imports/ui/pages/invoice';
+import Addbiller from '/imports/ui/pages/addbiller';
+
 
 export default createContainer(() => {
 
-  return {
 
+
+  return {
+  	
   };
-}, Invoice);
+}, Addbiller);

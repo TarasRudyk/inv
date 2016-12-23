@@ -8,11 +8,10 @@ export default class Customers extends React.Component {
   }
 
   render() {
-  	const {customers} = this.props;
+  	const { customers } = this.props;
 		return (
 			<div className="container">
 				<div className="row">
-					<a href='/customers/addcustomer' role="button">Add New Customer</a>
 		  		<table className="table table-hover">
 				    <thead>
 				      <tr>
@@ -37,7 +36,10 @@ export default class Customers extends React.Component {
 				    			<td>{item.customerName}</td>
 				    			<td>{item.contacts.email}</td>
 				    			<td></td>
-				    			<td>{item.exist}</td>
+				    			{item.enabled ? 
+				    			<td><span className="glyphicon glyphicon-ok"></span></td> :
+				    			<td><span className="glyphicon glyphicon-remove"></span></td> 
+				    			}
 				    		</tr>
 				    		))
 				    }
