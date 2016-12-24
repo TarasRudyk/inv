@@ -5,11 +5,11 @@ import './methods'
 
 export const createCustomer = (customer) => {
 
-	return Meteor.call('customersCreate', customer, (err) => {
+	return Meteor.call('createCustomer', customer, (err) => {
 		if(err) {
 			Bert.alert(err.reason + ' the customer hasn\'t been added', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
-			Bert.alert('The customer is added successfully', 'success', 'fixed-top', 'fa-frown-o');
+			Bert.alert('The customer is added successfully', 'success', 'fixed-top', 'fa-smile-o ');
 			FlowRouter.go('/')
 		}
 	})
@@ -22,9 +22,19 @@ export const editCustomer = (Id, customer) => {
 		if(err) {
 			Bert.alert(err.reason + ' the customer hasn\'t been edited', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
-			Bert.alert('The customer is edited successfully', 'success', 'fixed-top', 'fa-frown-o');
+			Bert.alert('The customer is edited successfully', 'success', 'fixed-top', 'fa-smile-o');
 			FlowRouter.go('/')
 		}
 	})
 
 };
+
+export const removeCustomer = (id) => {
+
+	return Meteor.call('removeCustomer', id, (err) => {
+		if(err) {
+			Bert.alert(err.reason + ' the customer hasn\'t been deleted', 'danger', 'fixed-top', 'fa-frown-o');
+		}
+	})
+
+};	

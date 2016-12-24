@@ -23,7 +23,7 @@ export default class Addcustomer extends React.Component {
     	customerName: this.refs.customerName.value.trim(),
 			customerContact: this.refs.customerContact.value.trim(),
 			address: {
-				street: this.refs.state.value.trim(),
+				street: this.refs.street.value.trim(),
 				city: this.refs.city.value.trim(),
 				zip: this.refs.zip.value.trim(),
 				country: this.refs.country.value,
@@ -44,8 +44,7 @@ export default class Addcustomer extends React.Component {
   onCancel() {
 	  this.refs.customerName.value = "";
 		this.refs.customerContact.value = "";
-		this.refs.straddress.value = "";
-		this.refs.state.value = "";
+		this.refs.street.value = "";
 		this.refs.city.value = "";
 		this.refs.zip.value = "";
 		this.refs.country.value = "";
@@ -66,7 +65,7 @@ export default class Addcustomer extends React.Component {
     	customerName: this.refs.customerName.value.trim(),
 			customerContact: this.refs.customerContact.value.trim(),
 			address: {
-				street: this.refs.state.value.trim(),
+				street: this.refs.street.value.trim(),
 				city: this.refs.city.value.trim(),
 				zip: this.refs.zip.value.trim(),
 				country: this.refs.country.value,
@@ -96,67 +95,40 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="name" className="col-sm-3 control-label">* Customer name:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<input className="form-control" type="text" ref="customerName" id="name" 
-								defaultValue={customer.customerName} /> :
-							<input className="form-control" type="text" ref="customerName" id="name" />
-						}
-							<span className="tip">[a-zA-Z, min 2 chars]</span>
+								defaultValue={ObjLength ? customer.customerName : ''} />
 						</div>
 					</div>
 
 					<div className="form-group">
 						<label htmlFor="contact" className="col-sm-3 control-label" >* Customer Contact (Attn):</label>
 						<div className="col-sm-6">
-						{ ObjLength ?
 							<input className="form-control" type="text" ref="customerContact" id="contact" 
-								defaultValue={customer.customerContact} /> :
-							<input className="form-control" type="text" ref="customerContact" id="contact" />
-						}
+								defaultValue={ObjLength ? customer.customerContact : ''} />
 						</div>
 					</div>
 
 					<div className="form-group">	
-						<label htmlFor="address" className="col-sm-3 control-label">Street address:</label>
+						<label htmlFor="street" className="col-sm-3 control-label">Street address:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
-							<input className="form-control" type="text" ref="straddress" id="straddress" 
-								defaultValue={customer.address.street} /> :
-							<input className="form-control" type="text" ref="straddress" id="straddress" />
-						}
+							<input className="form-control" type="text" ref="street" id="street" 
+								defaultValue={ObjLength ? customer.address.street :''} />
 						</div>
 					</div>
  
 					<div className="form-group">
 						<label htmlFor="city" className="col-sm-3 control-label" >* City:</label>
 						<div className="col-sm-6">
-						{ ObjLength ?
 							<input className="form-control" type="text" ref="city" id="city"
-								defaultValue={customer.address.city} /> : 
-							<input className="form-control" type="text" ref="city" id="city" />
-						}
-						</div>
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="state" className="col-sm-3 control-label">State:</label>
-						<div className="col-sm-6">
-						{ ObjLength ?
-							<input className="form-control" type="text" ref="state" id="state" 
-								defaultValue={customer.address.state} /> :
-							<input className="form-control" type="text" ref="state" id="state" /> 
-						}
+								defaultValue={ObjLength ? customer.address.city : ''} />
 						</div>
 					</div>
 
 					<div className="form-group">
 						<label htmlFor="zip" className="col-sm-3 control-label">Zip code:</label>
 						<div className="col-sm-6">
-						{ ObjLength ?
 							<input className="form-control" type="text" ref="zip" id="zip" 
-							 	defaultValue={customer.address.zip} /> :
-						  <input className="form-control" type="text" ref="zip" id="zip" />
-					  }
+							 	defaultValue={ObjLength ? customer.address.zip : ''} />
 							<span className="tip">Numbers are allowed only</span>
 						</div>
 					</div>
@@ -164,22 +136,16 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="country" className="col-sm-3 control-label">Country:</label>
 						<div className="col-sm-6">
-						{ ObjLength ?
 							<input className="form-control" type="text" ref="country" id="country" 
-								defaultValue={customer.address.country} /> :
-							<input className="form-control" type="text" ref="country" id="country" />
-						}
+								defaultValue={ObjLength ? customer.address.country : ''} />
 						</div>
 					</div>
 
 					<div className="form-group">
 						<label htmlFor="phone" className="col-sm-3 control-label" >* Phone:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<input className="form-control" type="text" ref="phone" id="phone" 
-								defaultValue={customer.contacts.phone} /> :
-							<input className="form-control" type="text" ref="phone" id="phone" />
-						}
+								defaultValue={ObjLength ? customer.contacts.phone : ''} />
 							<span className="tip">Numbers are allowed only</span>
 						</div>
 					</div>
@@ -187,11 +153,8 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="mob" className="col-sm-3 control-label" >Mobile:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<input className="form-control" type="text" ref="mob" id="mob" 
-								defaultValue={customer.contacts.mobile} /> :
-							<input className="form-control" type="text" ref="mob" id="mob" />
-						}
+								defaultValue={ObjLength ? customer.contacts.mobile : ''} />
 							<span className="tip">Numbers are allowed only</span>
 						</div>
 					</div>
@@ -199,11 +162,8 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="fax" className="col-sm-3 control-label" >Fax:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<input className="form-control" type="text" ref="fax" id="fax" 
-								defaultValue={customer.contacts.fax} /> :
-							<input className="form-control" type="text" ref="fax" id="fax" />
-						}
+								defaultValue={ObjLength ? customer.contacts.fax : ''} /> 
 							<span className="tip">Numbers are allowed only</span>
 						</div>
 					</div>
@@ -211,22 +171,16 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<label htmlFor="email" className="col-sm-3 control-label">* Email:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<input className="form-control" type="email" ref="email" id="email" 
-								defaultValue={customer.contacts.email} /> : 
-							<input className="form-control" type="email" ref="email" id="email" />
-						}
+								defaultValue={ObjLength ? customer.contacts.email : ''} />
 						</div>
 					</div>
 
 					<div className="form-group">
 						<label htmlFor="notes" className="col-sm-3 control-label">Notes:</label>
 						<div className="col-sm-6">
-						{ ObjLength ? 
 							<textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" 
-								defaultValue={customer.notess} /> :
-							<textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" />
-						}
+								defaultValue={ObjLength ? customer.notes : ''} />
 						</div>
 					</div>
 
@@ -244,7 +198,7 @@ export default class Addcustomer extends React.Component {
 						<div className="form-group buttons">
 							<div className="col-sm-3"></div>
 							<div className="col-sm-3">
-								<button type="button" type="submit" className="btn btn-primary btn-custom">Save</button>
+								<button type="submit" className="btn btn-primary btn-custom">Save</button>
 							</div>
 							<div className="col-sm-3">
 								<button type="button" onClick={this.onCancel} className="btn btn-danger btn-custom">Cancel</button>

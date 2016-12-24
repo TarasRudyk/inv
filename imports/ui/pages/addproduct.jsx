@@ -71,22 +71,16 @@ export default class Addproduct extends React.Component {
           <div className="form-group">
             <label htmlFor="description" className="col-sm-3 control-label">* Description:</label>
             <div className="col-sm-6">
-            { ObjLength ?
               <input className="form-control" type="text" ref="description" id="description" 
-               defaultValue={product.description} /> :
-              <input className="form-control" type="text" ref="description" id="description" />
-            }
+               defaultValue={ObjLength ? product.description : ''} />
             </div>
           </div>
 
           <div className="form-group">
             <label htmlFor="unitPrice" className="col-sm-3 control-label" >* Unit Price:</label>
             <div className="col-sm-6">
-            { ObjLength ?
               <input className="form-control" type="text" ref="unitPrice" id="unitPrice" 
-               defaultValue={product.unitPrice} /> :
-              <input className="form-control" type="text" ref="unitPrice" id="unitPrice" />
-            }
+               defaultValue={ObjLength ? product.unitPrice : ''} />
               <span className="tip">Numbers are allowed only</span>
             </div>
           </div>
@@ -94,11 +88,8 @@ export default class Addproduct extends React.Component {
           <div className="form-group">  
             <label htmlFor="cost" className="col-sm-3 control-label">Cost:</label>
             <div className="col-sm-6">
-            { ObjLength ?
               <input className="form-control" type="text" ref="cost" id="cost" 
-                defaultValue={product.cost} /> :
-              <input className="form-control" type="text" ref="cost" id="cost" />
-            }
+                defaultValue={ObjLength ? product.cost : ''} />
               <span className="tip">Numbers are allowed only</span>
             </div>
           </div>
@@ -106,22 +97,16 @@ export default class Addproduct extends React.Component {
           <div className="form-group">
             <label htmlFor="customField" className="col-sm-3 control-label" >Custom Field:</label>
             <div className="col-sm-6">
-            { ObjLength ?
               <input className="form-control" type="text" ref="customField" id="customField"
-                defaultValue={product.customField} /> :
-              <input className="form-control" type="text" ref="customField" id="customField" />
-            }
+                defaultValue={ObjLength ? product.customField : ''} />
             </div>
           </div>
 
           <div className="form-group">
             <label htmlFor="notes" className="col-sm-3 control-label">Notes:</label>
             <div className="col-sm-6">
-            { ObjLength ?
               <textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" 
-               defaultValue={product.notes} /> :
-              <textarea className="form-control" rows="5" cols="45" type="text" ref="notes" id="notes" />
-            }
+               defaultValue={ObjLength ? product.notes : ''} />
             </div>
           </div>
 
@@ -134,11 +119,12 @@ export default class Addproduct extends React.Component {
             </select>
             </div>
           </div>
+          
           { (!this.props.product) ?
             <div className="form-group buttons">
               <div className="col-sm-3"></div>
               <div className="col-sm-3">
-                <button type="button" type="submit" className="btn btn-primary btn-custom">Save</button>
+                <button type="submit" className="btn btn-primary btn-custom">Save</button>
               </div>
               <div className="col-sm-3">
                 <button type="button" onClick={this.onCancel} className="btn btn-danger btn-custom">Cancel</button>

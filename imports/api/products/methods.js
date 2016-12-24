@@ -22,7 +22,7 @@ Meteor.methods({
     check(notes, String);
     check(enabled, Boolean);
 
-    const Id = Products.find().count() + 1;
+    const Id = Products.findOne( {} , { sort: { Id: -1 }} ).Id + 1;
 
     Products.insert({ description, unitPrice, cost, customField, notes, enabled, Id });
           
@@ -47,6 +47,13 @@ Meteor.methods({
     const query = { $set: { description, unitPrice, cost, customField, notes, enabled } };
 
     Products.update({_id: Id}, query);
-  }
+  },
+
+  removeProduct(id) {
+    check(id, String);
+
+    Products.remove({_id: id})
+ }
+
 
 });

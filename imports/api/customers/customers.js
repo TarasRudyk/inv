@@ -30,10 +30,6 @@ Customers.schema = new SimpleSchema({
   'address.city': {
     type: String
   },
-  'address.state': {
-    type: String,
-    optional: true,
-  },
   'address.zip': {
     type: Number,
     regEx: SimpleSchema.RegEx.ZipCode,

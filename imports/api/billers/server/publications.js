@@ -1,2 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+
+import { Billers } from '../billers';
+
+Meteor.publish('billers', function () {
+	
+  return Billers.find({});
+});

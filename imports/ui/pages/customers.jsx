@@ -1,10 +1,18 @@
 import React from 'react';
 
+import {removeCustomer} from '/imports/api/customers/actions';
+
 export default class Customers extends React.Component {
   constructor(props) {
 	super(props);
 	this.state = {};
 
+  }
+
+  onRemove (id) {
+  	if (confirm('Are you sure, delete permanently ?')) {
+	  	removeCustomer(id)
+  	}
   }
 
   render() {
@@ -29,7 +37,11 @@ export default class Customers extends React.Component {
 				    		<tr key={item._id}>
 				    			<td>
 						        <a href={`/customers/addcustomer/${item._id}`}>
-						          <span className="glyphicon glyphicon-pencil"></span>
+						          <span className="fa fa-pencil"></span>
+						        </a>
+  					        &nbsp;&nbsp;&nbsp;
+						        <a href="" onClick={this.onRemove.bind(this, item._id)}>
+						          <span className="fa fa-trash" aria-hidden="true"></span>
 						        </a>
 					        </td>
 				    			<td>{item.Id}</td>

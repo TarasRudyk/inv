@@ -7,7 +7,7 @@ import { Customers } from './customers';
 
 Meteor.methods({
 
-customersCreate(customer) {
+createCustomer(customer) {
     const customerName = customer.customerName;
     const customerContact = customer.customerContact;
     const address = customer.address;
@@ -46,6 +46,12 @@ customersCreate(customer) {
     const query = { $set: { customerName, customerContact, address, contacts, notes, enabled } };
 
     Customers.update({_id: Id}, query);
+ },
+
+  removeCustomer(id) {
+    check(id, String);
+
+    Customers.remove({_id: id})
  }
 
 });
