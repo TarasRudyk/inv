@@ -187,7 +187,7 @@ export default class Addcustomer extends React.Component {
 					<div className="form-group">
 						<div className="col-sm-3"></div>
 						<div className="col-sm-6">
-            <select onChange={this.handleChange	}>
+            <select className="form-control" onChange={this.handleChange	}>
               <option value={true} default>Enabled</option>
               <option value={false}>Disabled</option>
             </select>

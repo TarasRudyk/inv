@@ -9,7 +9,7 @@ export default class Invoices extends React.Component {
 
   render() {
     return (
-      <h1>Invoice</h1>
+			<h5>invoices</h5>
     );
   }
 }

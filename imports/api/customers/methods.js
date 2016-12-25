@@ -22,7 +22,7 @@ createCustomer(customer) {
     check(notes, String);
     check(enabled, Boolean);
 
-    const Id = Customers.find().count() + 1;
+    const Id = Customers.findOne( {} , { sort: { Id: -1 }} ).Id + 1;
 
     Customers.insert({customerName, customerContact, address, contacts, notes, enabled, Id});
   },
