@@ -22,7 +22,9 @@ createBiller(biller) {
 	check(notes, String);
 	check(enabled, Boolean);
 
-	const Id = Billers.findOne( {} , { sort: { Id: -1 }} ).Id + 1;
+	const count = Billers.find().count()
+
+	const Id = count ? Billers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 0;
 
 	Billers.insert({billerName, address, contacts, invoiceFooter, notes, enabled, Id});
   },

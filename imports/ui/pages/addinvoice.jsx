@@ -11,44 +11,37 @@ export default class Addinvoice extends React.Component {
     this.state = {
       startDate: moment(),
       invoices: [],
-      item: {
-        quantity: '1',
-        product: 'Select Product',
-        price: '0'
-      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.onAdd = this.onAdd.bind(this);
     this.onRemove = this.onRemove.bind(this);
+    this.getItem = this.getItem.bind(this); 
   };
 
   handleChange (date) {
     this.setState({ startDate: date })
   };
 
-  getItem({item}) {
-    console.log(item)
+  getItem(state) {
+    console.log(state)
   }
+
 
   onAdd() {
     const invoices = this.state.invoices;
     invoices.push(
-      <InputField key={invoices.length} products={this.props.products} callback={this.getItem} />
+      <InputField key={invoices.length} products={this.props.products} callback={this.getItem}  />
     );
 
-    this.setState({
-        invoices
-    });
+    this.setState({invoices});
 
   };
 
   onRemove() {
     const invoices = this.state.invoices
     invoices.splice(invoices.length-1, 1)
-    console.log(invoices)
-    this.setState({
-      invoices
-    })
+
+    this.setState({invoices})
   }
 
 
@@ -58,6 +51,7 @@ export default class Addinvoice extends React.Component {
     const { invoice } = this.state;
     const ObjLength = invoice ? Object.keys(invoice).length : null;
     console.log(this.state.invoices)
+    console.log(this.refs.bill)
     
     return (
       <div className="container">
@@ -110,6 +104,7 @@ export default class Addinvoice extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
+                  <InputField  products={this.props.products} ref="bill" callback={this.getItem}  />
                      {this.state.invoices.map((input, index) => input)}
                   </tbody>
                 </table>
