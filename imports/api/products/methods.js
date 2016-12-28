@@ -23,7 +23,7 @@ Meteor.methods({
     check(enabled, Boolean);
 
     const count = Products.find().count();
-    const Id = count ? Products.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 0;
+    const Id = count ? Products.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;
 
     Products.insert({ description, unitPrice, cost, customField, notes, enabled, Id });
           

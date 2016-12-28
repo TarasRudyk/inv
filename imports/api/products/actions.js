@@ -10,7 +10,7 @@ export const createProduct = (product) => {
 			Bert.alert(err.reason + ' the product hasn\'t been added', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
 			Bert.alert('The product is added successfully', 'success', 'fixed-top', 'fa-smile-o');
-			FlowRouter.go('/')
+			FlowRouter.go('/products')
 		}
 	})
 
@@ -23,7 +23,7 @@ export const editProduct = (Id, product) => {
 			Bert.alert(err.reason + ' the product hasn\'t been edited', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
 			Bert.alert('The product is edited successfully', 'success', 'fixed-top', 'fa-smile-o');
-			FlowRouter.go('/')
+			FlowRouter.go('/products')
 		}
 	})
 

@@ -110,7 +110,7 @@ export default class Addbiller extends React.Component {
           </div>
  
           <div className="form-group">
-            <label htmlFor="city" className="col-sm-3 control-label" >* City:</label>
+            <label htmlFor="city" className="col-sm-3 control-label" >City:</label>
             <div className="col-sm-6">
               <input className="form-control" type="text" ref="city" id="city"  
                 defaultValue={ObjLength ? biller.address.city : ''} />
@@ -135,7 +135,7 @@ export default class Addbiller extends React.Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone" className="col-sm-3 control-label" >* Phone:</label>
+            <label htmlFor="phone" className="col-sm-3 control-label" >Phone:</label>
             <div className="col-sm-6">
               <input className="form-control" type="text" ref="phone" id="phone" 
                 defaultValue={ObjLength ? biller.contacts.phone : ''} />
@@ -162,7 +162,7 @@ export default class Addbiller extends React.Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email" className="col-sm-3 control-label">* Email:</label>
+            <label htmlFor="email" className="col-sm-3 control-label">Email:</label>
             <div className="col-sm-6">
               <input className="form-control" type="email" ref="email" id="email"  
                 defaultValue={ObjLength ? biller.contacts.email : ''} />

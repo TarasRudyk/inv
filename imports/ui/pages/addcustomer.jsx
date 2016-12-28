@@ -101,7 +101,7 @@ export default class Addcustomer extends React.Component {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="contact" className="col-sm-3 control-label" >* Customer Contact (Attn):</label>
+						<label htmlFor="contact" className="col-sm-3 control-label" >Customer Contact (Attn):</label>
 						<div className="col-sm-6">
 							<input className="form-control" type="text" ref="customerContact" id="contact" 
 								defaultValue={ObjLength ? customer.customerContact : ''} />
@@ -117,7 +117,7 @@ export default class Addcustomer extends React.Component {
 					</div>
  
 					<div className="form-group">
-						<label htmlFor="city" className="col-sm-3 control-label" >* City:</label>
+						<label htmlFor="city" className="col-sm-3 control-label" >City:</label>
 						<div className="col-sm-6">
 							<input className="form-control" type="text" ref="city" id="city"
 								defaultValue={ObjLength ? customer.address.city : ''} />
@@ -142,7 +142,7 @@ export default class Addcustomer extends React.Component {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="phone" className="col-sm-3 control-label" >* Phone:</label>
+						<label htmlFor="phone" className="col-sm-3 control-label" >Phone:</label>
 						<div className="col-sm-6">
 							<input className="form-control" type="text" ref="phone" id="phone" 
 								defaultValue={ObjLength ? customer.contacts.phone : ''} />
@@ -169,7 +169,7 @@ export default class Addcustomer extends React.Component {
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="email" className="col-sm-3 control-label">* Email:</label>
+						<label htmlFor="email" className="col-sm-3 control-label">Email:</label>
 						<div className="col-sm-6">
 							<input className="form-control" type="email" ref="email" id="email" 
 								defaultValue={ObjLength ? customer.contacts.email : ''} />

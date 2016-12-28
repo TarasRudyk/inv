@@ -1,8 +1,10 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import InputField from '/imports/ui/components/inputField';
-import 'react-datepicker/dist/react-datepicker.css';
+import { getLocalState } from '/imports/startup/client/local-state';
+import { createInvoice } from '/imports/api/invoice/actions';
 
 	
 export default class Addinvoice extends React.Component {
@@ -10,49 +12,44 @@ export default class Addinvoice extends React.Component {
     super(props);
     this.state = {
       startDate: moment(),
-      invoices: [],
+      items: [],
     };
+
     this.handleChange = this.handleChange.bind(this);
-    this.onAdd = this.onAdd.bind(this);
-    this.onRemove = this.onRemove.bind(this);
-    this.getItem = this.getItem.bind(this); 
+    this.getItem = this.getItem.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
   };
 
   handleChange (date) {
     this.setState({ startDate: date })
   };
 
-  getItem(state) {
-    console.log(state)
+  getItem(items, prices) {
+    const totalPrice  = (prices.reduce((a, b) => a + b, 0)).toFixed(2);
+    const itemsArr = this.state.items;
+    getLocalState().set('items', items);
+    getLocalState().set('totalPrice', totalPrice);
   }
 
+  onSubmit(e) {
+    e.preventDefault();
 
-  onAdd() {
-    const invoices = this.state.invoices;
-    invoices.push(
-      <InputField key={invoices.length} products={this.props.products} callback={this.getItem}  />
-    );
+    const items = getLocalState().get('items');
+    const totalPrice = getLocalState().get('totalPrice');
+    const notes = this.refs.notes.value.trim();
+    const date = this.state.startDate._d;
+    const customer = this.refs.customer.value
+    const biller = this.refs.biller.value
 
-    this.setState({invoices});
-
-  };
-
-  onRemove() {
-    const invoices = this.state.invoices
-    invoices.splice(invoices.length-1, 1)
-
-    this.setState({invoices})
+    createInvoice(items, totalPrice, notes, date, customer, biller);
   }
-
 
   render() {
 
     const { billers, customers, products } = this.props;
     const { invoice } = this.state;
-    const ObjLength = invoice ? Object.keys(invoice).length : null;
-    console.log(this.state.invoices)
-    console.log(this.refs.bill)
-    
+    const ObjLength = invoice ? Object.keys(invoice).length : null;       
+
     return (
       <div className="container">
         <div className="row">
@@ -61,10 +58,10 @@ export default class Addinvoice extends React.Component {
             <div className="form-group">
               <label htmlFor="description" className="col-sm-3 control-label">Biller:</label>
               <div className="col-sm-6">
-                <select className="form-control">
+                <select className="form-control" ref="biller">
                   {
                     billers.map(item =>
-                      <option key={item._id} value={item.billerName.bind}>{item.billerName}</option>
+                      <option key={item._id} value={item.billerName}>{item.billerName}</option>
                   )}
                 </select>
               </div>
@@ -73,7 +70,7 @@ export default class Addinvoice extends React.Component {
             <div className="form-group">
               <label htmlFor="unitPrice" className="col-sm-3 control-label" >Customer:</label>
               <div className="col-sm-6">
-                <select className="form-control">
+                <select className="form-control" ref="customer">
                   {
                     customers.map(item =>
                       <option key={item._id} value={item.customerName}>{item.customerName}</option>
@@ -103,33 +100,9 @@ export default class Addinvoice extends React.Component {
                       <th>Unit Price</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  <InputField  products={this.props.products} ref="bill" callback={this.getItem}  />
-                     {this.state.invoices.map((input, index) => input)}
-                  </tbody>
+                  <InputField  products={this.props.products} invoice={this.getItem}  />
+                     {this.state.items.map((inputField) => inputField)}
                 </table>
-              </div>
-            </div>
-
-            <div className="form-group buttons">
-              <div className="col-sm-3"></div>
-              <div className="col-sm-3">
-                <a href="" onClick={this.onAdd}>
-                  <span className="fa fa-plus" aria-hidden="true"></span>
-                </a>
-              </div>
-              <div className="col-sm-3">
-                <a href="" onClick={this.onRemove}>
-                  <span className="fa fa-minus" aria-hidden="true"></span>
-                </a>
-              </div>
-            </div>
-
-            <div className="form-group buttons">
-              <div className="col-sm-3"></div>
-              <div className="col-sm-3"></div>
-              <div className="col-sm-3">
-                <h5><b>Total Price:</b></h5>
               </div>
             </div>
 
@@ -141,23 +114,12 @@ export default class Addinvoice extends React.Component {
               </div>
             </div>
 
-            { (!this.props.invoice) ?
-              <div className="form-group buttons">
-                <div className="col-sm-3"></div>
-                <div className="col-sm-3">
-                  <button type="submit" className="btn btn-primary btn-custom">Save</button>
-                </div>
-                <div className="col-sm-3">
-                  <button type="button" onClick={this.onCancel} className="btn btn-danger btn-custom">Cancel</button>
-                </div>
-              </div> :
-              <div className="form-group buttons">
-                <div className="col-sm-3"></div>
-                <div className="col-sm-6">
-                  <button type="button" onClick={this.onEdit} className="btn btn-success btn-custom">Edit</button>
-                </div>
+            <div className="form-group buttons">
+              <div className="col-sm-3"></div>
+              <div className="col-sm-3">
+                <button type="submit" className="btn btn-primary btn-custom">Save</button>
               </div>
-            }
+            </div> 
 
           </form>
         </div>

@@ -15,20 +15,22 @@ Customers.schema = new SimpleSchema({
   },
   customerName: {
     type: String,
-    regEx: /^[a-zA-Z_]{2,25}$/
   },
   customerContact: {
     type: String,
+    optional: true
   },
   address: {
-    type: Object
+    type: Object,
+    optional: true
   },
   'address.street': {
     type: String,
     optional: true
   },
   'address.city': {
-    type: String
+    type: String,
+    optional: true
   },
   'address.zip': {
     type: Number,
@@ -40,10 +42,12 @@ Customers.schema = new SimpleSchema({
     optional: true
   },
   contacts: {
-    type: Object
+    type: Object,
+    optional: true
   },
   'contacts.phone': {
-    type: Number
+    type: Number,
+    optional: true
   },
   'contacts.mobile': {
     type: Number,
@@ -55,7 +59,8 @@ Customers.schema = new SimpleSchema({
   },
   'contacts.email': {
     type: String,
-    regEx: SimpleSchema.RegEx.Email
+    regEx: SimpleSchema.RegEx.Email,
+    optional: true
   },
   notes: {
     type: String,
@@ -66,6 +71,10 @@ Customers.schema = new SimpleSchema({
     autoValue() {
       return new Date();
     }
+  },
+  total: {
+    type: String,
+    optional: true
   },
   enabled: {
     type: Boolean,

@@ -18,14 +18,16 @@ Billers.schema = new SimpleSchema({
     type: String
   },
   address: {
-    type: Object
+    type: Object,
+    optional: true,
   },
   'address.street': {
     type: String,
-    optional: true
+    optional: true,
   },
   'address.city': {
-    type: String
+    type: String,
+    optional: true,
   },
   'address.zip': {
     type: Number,
@@ -37,10 +39,12 @@ Billers.schema = new SimpleSchema({
     optional: true
   },
 	contacts: {
-    type: Object
+    type: Object,
+    optional: true
   },
   'contacts.phone': {
-    type: Number
+    type: Number,
+    optional: true
   },
   'contacts.mobile': {
     type: Number,
@@ -52,7 +56,8 @@ Billers.schema = new SimpleSchema({
   },
   'contacts.email': {
     type: String,
-    regEx: SimpleSchema.RegEx.Email
+    regEx: SimpleSchema.RegEx.Email,
+    optional: true
   },
 	invoiceFooter: {
     type: String,

@@ -24,7 +24,7 @@ createBiller(biller) {
 
 	const count = Billers.find().count()
 
-	const Id = count ? Billers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 0;
+	const Id = count ? Billers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;
 
 	Billers.insert({billerName, address, contacts, invoiceFooter, notes, enabled, Id});
   },

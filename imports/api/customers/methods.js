@@ -25,7 +25,7 @@ createCustomer(customer) {
 
     const count = Customers.find().count();
 
-    const Id = count ? Customers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 0;
+    const Id = count ? Customers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;
 
     Customers.insert({customerName, customerContact, address, contacts, notes, enabled, Id});
   },

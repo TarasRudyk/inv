@@ -47,7 +47,7 @@ export default class Customers extends React.Component {
 				    			<td>{item.Id}</td>
 				    			<td>{item.customerName}</td>
 				    			<td>{item.contacts.email}</td>
-				    			<td></td>
+				    			<td>{item.total}</td>
 				    			{item.enabled ? 
 				    			<td><span className="glyphicon glyphicon-ok"></span></td> :
 				    			<td><span className="glyphicon glyphicon-remove"></span></td> 
