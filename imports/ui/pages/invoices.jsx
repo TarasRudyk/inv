@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {removeInvoice} from '/imports/api/invoice/actions';
+import { removeInvoice, downloadPdf } from '/imports/api/invoice/actions';
+import { PdfInvoice } from '/imports/ui/components/pdfdocument'
 
 export default class Invoices extends React.Component {
   constructor(props) {
@@ -15,12 +16,17 @@ export default class Invoices extends React.Component {
   	}
   }
 
+  downloadPdf (id) {
+  	downloadPdf(id)
+  }
+
   render() {
   	const { invoices } = this.props;
 
     return (
 			<div className="container">
 				<div className="row">
+
 		  		<table className="table table-hover">
 				    <thead>
 				      <tr>
@@ -37,8 +43,9 @@ export default class Invoices extends React.Component {
 				    	invoices.map(item => (
 				    		<tr key={item._id}>
 				    			<td>
-						        <a href="">
+						        <a href="" onClick={this.downloadPdf.bind(this, item._id)}>
 						          <span className="fa fa-file-pdf-o" aria-hidden="true"></span>
+						          {false ? <PdfInvoice style="display:none" invoice={item} /> : null}
 						        </a>
   					        &nbsp;&nbsp;&nbsp;
 						        <a href="" onClick={this.onRemove.bind(this, item._id)}>
@@ -48,7 +55,7 @@ export default class Invoices extends React.Component {
 				    			<td>{item.Id}</td>
 				    			<td>{item.biller}</td>
 				    			<td>{item.customer}</td>
-				    			<td>{item.date.slice(4, -24)}</td>
+				    			<td>{item.date.toString().slice(4, -24)}</td>
 				    			<td>{item.totalPrice}</td>
 				    		</tr>
 				    		))

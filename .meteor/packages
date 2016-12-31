@@ -19,3 +19,5 @@ aldeed:collection2
 mdg:validated-method
 twbs:bootstrap
 themeteorchef:bert
+
+ddp-rate-limiter@1.0.5

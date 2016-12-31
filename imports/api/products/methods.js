@@ -18,9 +18,13 @@ Meteor.methods({
     check(description, String);
     check(unitPrice, Number);
     check(cost, Number);
-    check(customField, String);
+    check(customField, String); 
     check(notes, String);
     check(enabled, Boolean);
+
+    if (!unitPrice) {
+      throw new Meteor.Error('Input correct unit price');
+    }
 
     const count = Products.find().count();
     const Id = count ? Products.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;

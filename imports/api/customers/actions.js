@@ -10,7 +10,7 @@ export const createCustomer = (customer) => {
 			Bert.alert(err.reason + ' the customer hasn\'t been added', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
 			Bert.alert('The customer is added successfully', 'success', 'fixed-top', 'fa-smile-o ');
-			FlowRouter.go('/customers')
+			FlowRouter.go('/customers');
 		}
 	})
 

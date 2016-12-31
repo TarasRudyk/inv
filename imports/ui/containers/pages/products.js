@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Products } from '/imports/api/products/products';
 
 import ProductsList from '/imports/ui/pages/products';
+import { Invoices } from '/imports/api/invoice/invoice';
 
 export default createContainer(() => {
 
