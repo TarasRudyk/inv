@@ -11,18 +11,30 @@ export default class Addinvoice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment(),
+      issueDate: moment(),
+      dueDate: moment().add(30, 'days'),
+      date: undefined,
       items: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+    this.handleIssueDate = this.handleIssueDate.bind(this);
+    this.handleDueDate = this.handleDueDate.bind(this);
     this.getItem = this.getItem.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
   };
 
-  handleChange (date) {
-    this.setState({ startDate: date })
+  handleDate (date) {
+    this.setState({ date })
   };
+
+  handleIssueDate (date) {
+    this.setState({ issueDate: date })
+  };
+
+  handleDueDate (date) {
+    this.setState({ dueDate: date })
+  }
 
   getItem(items, prices) {
     const totalPrice  = (prices.reduce((a, b) => a + b, 0)).toFixed(2);
@@ -37,11 +49,15 @@ export default class Addinvoice extends React.Component {
     const items = getLocalState().get('items');
     const totalPrice = getLocalState().get('totalPrice');
     const notes = this.refs.notes.value.trim();
-    const date = this.state.startDate._d;
+    const dates = {
+      date: this.state.date ? this.state.date._d : null,
+      issueDate: this.state.issueDate._d,
+      dueDate: this.state.dueDate._d,
+    }
     const customer = this.refs.customer.value
     const biller = this.refs.biller.value
 
-    createInvoice(items, totalPrice, notes, date, customer, biller);
+    createInvoice(items, totalPrice, notes, dates, customer, biller);
   }
 
   render() {
@@ -56,7 +72,7 @@ export default class Addinvoice extends React.Component {
           <form className="form-horizontal col-sm-9" onSubmit={this.onSubmit}>
 
             <div className="form-group">
-              <label htmlFor="description" className="col-sm-3 control-label">Biller:</label>
+              <label className="col-sm-3 control-label">Biller:</label>
               <div className="col-sm-6">
                 <select className="form-control" ref="biller">
                   {
@@ -68,7 +84,7 @@ export default class Addinvoice extends React.Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="unitPrice" className="col-sm-3 control-label" >Customer:</label>
+              <label className="col-sm-3 control-label" >Customer:</label>
               <div className="col-sm-6">
                 <select className="form-control" ref="customer">
                   {
@@ -80,10 +96,33 @@ export default class Addinvoice extends React.Component {
             </div>
 
             <div className="form-group">  
+              <label className="col-sm-3 control-label">Date of issue:</label>
+              <div className="col-sm-6">
+                <DatePicker className="form-control"
+                            selected={this.state.issueDate}
+                            onChange={this.handleIssueDate} />
+                    &nbsp;&nbsp;&nbsp;
+                <span className="fa fa-calendar" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div className="form-group">  
+              <label className="col-sm-3 control-label">Due date:</label>
+              <div className="col-sm-6">
+                <DatePicker className="form-control" 
+                    selected={this.state.dueDate} 
+                    onChange={this.handleDueDate} />
+                    &nbsp;&nbsp;&nbsp;
+                <span className="fa fa-calendar" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div className="form-group">  
               <label htmlFor="cost" className="col-sm-3 control-label">Date:</label>
               <div className="col-sm-6">
-                <DatePicker className="form-control" selected={this.state.startDate} 
-                    onChange={this.handleChange} />
+                <DatePicker className="form-control"
+                    selected={this.state.date} 
+                    onChange={this.handleDate} />
                     &nbsp;&nbsp;&nbsp;
                 <span className="fa fa-calendar" aria-hidden="true"></span>
               </div>

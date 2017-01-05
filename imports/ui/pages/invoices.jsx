@@ -55,7 +55,7 @@ export default class Invoices extends React.Component {
 				    			<td>{item.Id}</td>
 				    			<td>{item.biller}</td>
 				    			<td>{item.customer}</td>
-				    			<td>{item.date.toString().slice(4, -24)}</td>
+				    			<td>{item.issueDate.toString().slice(4, -24)}</td>
 				    			<td>{item.totalPrice}</td>
 				    		</tr>
 				    		))

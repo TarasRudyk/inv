@@ -11,19 +11,23 @@ import { generateComponentAsPDF } from './generate-pdf';
 
 Meteor.methods({
 
-createInvoice(items, totalPrice, notes, date, customer, biller) {
+createInvoice(items, totalPrice, notes, dates, customer, biller) {
 
-    check(date, Date)
+    check(dates, Object)
     check(totalPrice, String);
     check(notes, String);
     check(customer, String);
     check(biller, String);
 
+    const date = dates.date;
+    const issueDate = dates.issueDate;
+    const dueDate = dates.dueDate;
+
     const count = Invoices.find().count();
 
     const Id = count ? Invoices.findOne( {} , { sort: { Id: -1 } } ).Id + 1 : 1;
 
-    Invoices.insert({ items, totalPrice, notes, date, customer, biller, Id });
+    Invoices.insert({ items, totalPrice, notes, date, issueDate, dueDate, customer, biller, Id });
 
     const money = Customers.findOne({ customerName: customer }).total || 0;
     const total = (Number(money) + Number(totalPrice)).toString()

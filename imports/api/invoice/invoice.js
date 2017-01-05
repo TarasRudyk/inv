@@ -32,7 +32,14 @@ Invoices.schema = new SimpleSchema({
     type: String, 
   },
   date: {
-    type: Date,
+    type: Date(),
+    optional: true
+  },
+  issueDate: {
+    type: Date()
+  },
+  dueDate: {
+    type: Date()
   },
   customer: {
     type: String,

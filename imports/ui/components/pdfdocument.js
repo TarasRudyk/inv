@@ -33,7 +33,10 @@ export const PdfInvoice = ({ invoice }) => (
         <h5 id='invoice'>Invoice</h5>
         <hr />
       </div>
-      <div></div>
+      <div>
+        <h6>Biller: {invoice.biller}</h6>
+        <h6>Biller: {invoice.biller}</h6>
+      </div>
       <h3>{ invoice.biller }</h3>
       <p>{ invoice.totalPrice }</p>
   
@@ -43,3 +46,4 @@ export const PdfInvoice = ({ invoice }) => (
 PdfInvoice.propTypes = {
   invoice: React.PropTypes.object.isRequired,
 };
+
