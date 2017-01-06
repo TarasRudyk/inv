@@ -34,6 +34,7 @@ export default class Addcustomer extends React.Component {
 				fax: this.refs.fax.value.trim(),
 				email: this.refs.email.value.trim(),
 			},
+			vat: this.refs.vat.value.trim(),
 			notes: this.refs.notes.value.trim(),
 			enabled: this.state.enabled
     };
@@ -52,6 +53,7 @@ export default class Addcustomer extends React.Component {
 		this.refs.mob.value = "";
 		this.refs.fax.value = "";
 		this.refs.email.value = "";
+		this.refs.vat.value = "";
 		this.refs.notes.value = "";
   };
 
@@ -76,6 +78,7 @@ export default class Addcustomer extends React.Component {
 				fax: this.refs.fax.value.trim(),
 				email: this.refs.email.value.trim(),
 			},
+			vat: this.refs.vat.value.trim(),
 			notes: this.refs.notes.value.trim(),
 			enabled: this.state.enabled
     };
@@ -173,6 +176,15 @@ export default class Addcustomer extends React.Component {
 						<div className="col-sm-6">
 							<input className="form-control" type="email" ref="email" id="email" 
 								defaultValue={ObjLength ? customer.contacts.email : ''} />
+						</div>
+					</div>
+
+					<div className="form-group">
+						<label htmlFor="vat" className="col-sm-3 control-label">VAT number:</label>
+						<div className="col-sm-6">
+							<input className="form-control" type="string" ref="vat" id="vat" 
+								defaultValue={ObjLength ? customer.vat : ''} />
+							<span className="tip">Numbers are allowed only</span>
 						</div>
 					</div>
 

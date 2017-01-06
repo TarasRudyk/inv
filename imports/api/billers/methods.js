@@ -8,9 +8,13 @@ import { Billers } from './billers';
 Meteor.methods({
 
 createBiller(biller) {
+	console.log(biller)
+
 	const billerName = biller.billerName;
 	const address = biller.address;
 	const contacts = biller.contacts;
+	const accountNumber = biller.accountNumber; //????
+	const vat = biller.vat;
 	const invoiceFooter = biller.invoiceFooter;
 	const notes = biller.notes;
 	const enabled = Boolean(biller.enabled === 'true' ? true : false);
@@ -18,6 +22,8 @@ createBiller(biller) {
 	check(billerName, String);
 	check(address, Object);
 	check(contacts, Object);
+	check(accountNumber, String); // ???
+	check(vat, String);
 	check(invoiceFooter, String);
 	check(notes, String);
 	check(enabled, Boolean);
@@ -26,13 +32,15 @@ createBiller(biller) {
 
 	const Id = count ? Billers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;
 
-	Billers.insert({billerName, address, contacts, invoiceFooter, notes, enabled, Id});
+	Billers.insert({billerName, address, contacts, invoiceFooter, accountNumber, vat, notes, enabled, Id});
   },
 
  editBiller(Id, biller) {
 	const billerName = biller.billerName;
 	const address = biller.address;
 	const contacts = biller.contacts;
+	const accountNumber = biller.accountNumber; //????
+	const vat = biller.vat;
 	const invoiceFooter = biller.invoiceFooter;
 	const notes = biller.notes;
 	const enabled = Boolean(biller.enabled === 'true' ? true : false);
@@ -41,12 +49,14 @@ createBiller(biller) {
 	check(billerName, String);
 	check(address, Object);
 	check(contacts, Object);
+	check(accountNumber, String); // ???
+	check(vat, String);
 	check(invoiceFooter, String);
 	check(notes, String);
 	check(enabled, Boolean);
 
 
-	const query = { $set: { billerName, address, contacts, invoiceFooter, notes, enabled } };
+	const query = { $set: { billerName, address, contacts, invoiceFooter, vat, accountNumber, notes, enabled } };
 
 	Billers.update({_id: Id}, query);
  },

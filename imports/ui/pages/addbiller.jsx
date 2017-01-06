@@ -33,6 +33,8 @@ export default class Addbiller extends React.Component {
         fax: this.refs.fax.value.trim(),
         email: this.refs.email.value.trim(),
       },
+      accountNumber: this.refs.accountNumber.value.trim(), //???
+      vat: this.refs.vat.value.trim(),
       invoiceFooter: this.refs.invoiceFooter.value.trim(),
       notes: this.refs.notes.value.trim(),
       enabled: this.state.enabled
@@ -52,6 +54,8 @@ export default class Addbiller extends React.Component {
     this.refs.mob.value = '';
     this.refs.fax.value = '';
     this.refs.email.value = '';
+    this.refs.accountNumber.value = ''; // ???
+    this.refs.vat.value = '';
     this.refs.invoiceFooter.value = '';
     this.refs.notes.value = '';
   };
@@ -72,6 +76,8 @@ export default class Addbiller extends React.Component {
         fax: this.refs.fax.value.trim(),
         email: this.refs.email.value.trim(),
       },
+      accountNumber: this.refs.accountNumber.value.trim(), // ???
+      vat: this.refs.vat.value.trim(),
       invoiceFooter: this.refs.invoiceFooter.value.trim(),
       notes: this.refs.notes.value.trim(),
       enabled: this.state.enabled
@@ -166,6 +172,23 @@ export default class Addbiller extends React.Component {
             <div className="col-sm-6">
               <input className="form-control" type="email" ref="email" id="email"  
                 defaultValue={ObjLength ? biller.contacts.email : ''} />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="accountNumber" className="col-sm-3 control-label">Account number:</label>
+            <div className="col-sm-6">
+              <input className="form-control" type="string" ref="accountNumber" id="accountNumber"  
+                defaultValue={ObjLength ? biller.accountNumber : ''} />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="vat" className="col-sm-3 control-label">VAT number:</label>
+            <div className="col-sm-6">
+              <input className="form-control" type="string" ref="vat" id="vat"  
+                defaultValue={ObjLength ? biller.vat : ''} />
+              <span className="tip">Numbers are allowed only</span>
             </div>
           </div>
 

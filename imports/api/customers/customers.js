@@ -62,6 +62,11 @@ Customers.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email,
     optional: true
   },
+  vat: {
+    type: String,
+    regEx: /^[0-9]{11}$/,
+    optional: true
+  },
   notes: {
     type: String,
     optional: true

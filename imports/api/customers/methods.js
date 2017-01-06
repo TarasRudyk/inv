@@ -12,6 +12,7 @@ createCustomer(customer) {
     const customerContact = customer.customerContact;
     const address = customer.address;
     const contacts = customer.contacts;
+    const vat = customer.vat;
     const notes = customer.notes;
     const enabled = Boolean(customer.enabled === 'true' ? true : false);
 
@@ -19,6 +20,7 @@ createCustomer(customer) {
     check(customerContact, String);
     check(address, Object);
     check(contacts, Object);
+    check(vat, String)
     check(notes, String);
     check(enabled, Boolean);
 
@@ -27,7 +29,7 @@ createCustomer(customer) {
 
     const Id = count ? Customers.findOne( {} , { sort: { Id: -1 }} ).Id + 1 : 1;
 
-    Customers.insert({customerName, customerContact, address, contacts, notes, enabled, Id});
+    Customers.insert({customerName, customerContact, address, contacts, vat, notes, enabled, Id});
   },
 
  editCustomer(Id,customer) {
@@ -35,7 +37,8 @@ createCustomer(customer) {
     const customerContact = customer.customerContact;
     const address = customer.address;
     const contacts = customer.contacts;
-    const notes = customer.notes;enabled
+    const vat = customet.vat;
+    const notes = customer.notes;enabled;
     const enabled = Boolean(customer.enabled==='true' ? true : false);
 
     check(Id, String);
@@ -43,10 +46,11 @@ createCustomer(customer) {
     check(customerContact, String);
     check(address, Object);
     check(contacts, Object);
+    check(vat, String);
     check(notes, String);
     check(enabled, Boolean);
 
-    const query = { $set: { customerName, customerContact, address, contacts, notes, enabled } };
+    const query = { $set: { customerName, customerContact, address, contacts, vat, notes, enabled } };
 
     Customers.update({_id: Id}, query);
  },

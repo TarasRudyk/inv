@@ -59,6 +59,15 @@ Billers.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email,
     optional: true
   },
+  accountNumber: {
+    type: String,
+    optional: true,
+  },
+  vat: {
+    type: String,
+    regEx: /^[0-9]{11}$/,
+    optional: true
+  },
 	invoiceFooter: {
     type: String,
     optional: true
