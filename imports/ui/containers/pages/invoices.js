@@ -7,9 +7,9 @@ import { Invoices } from '/imports/api/invoice/invoice';
 
 import InvoicesList from '/imports/ui/pages/invoices';
 
-export default createContainer(({ sorted }) => {
+export default createContainer(({ sorted, sortToggle }) => {
 	const sort= {}
-	sort[sorted] =1
+	sort[sorted] = Number(sortToggle)
 
 	const invoicesHandle = Meteor.subscribe('invoices');
 	const invoices = invoicesHandle.ready() ? Invoices.find({}, { sort } ).fetch() : [];
