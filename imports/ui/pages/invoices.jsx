@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { removeInvoice, downloadPdf } from '/imports/api/invoice/actions';
-import { PdfInvoice } from '/imports/ui/components/pdfdocument'
+import { PdfInvoice } from '/imports/ui/components/pdfdocument';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 export default class Invoices extends React.Component {
   constructor(props) {
@@ -20,8 +21,12 @@ export default class Invoices extends React.Component {
   	downloadPdf(id)
   }
 
+  handleSorting (sorted) {
+  	 FlowRouter.setQueryParams({ sorted });
+  }
+
   render() {
-  	const { invoices } = this.props;
+  	const { invoices, billers, customers } = this.props;
 
     return (
 			<div className="container">
@@ -31,11 +36,11 @@ export default class Invoices extends React.Component {
 				    <thead>
 				      <tr>
 				        <th>Actions</th>
-				        <th>ID</th>
-				        <th>Biller</th>
-				        <th>Customer</th>
-				        <th>Date</th>
-				        <th>Total</th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'Id')}>ID</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'billerName')}>Biller</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'customerName')}>Customer</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'issueDate')}>Date</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'totalPrice')}>Total</a></th>
 				      </tr>
 				    </thead>
 				    <tbody>
@@ -45,7 +50,9 @@ export default class Invoices extends React.Component {
 				    			<td>
 						        <a href="" onClick={this.downloadPdf.bind(this, item._id)}>
 						          <span className="fa fa-file-pdf-o" aria-hidden="true"></span>
-						          {false ? <PdfInvoice style="display:none" invoice={item} /> : null}
+						          {false ? <PdfInvoice style="display:none" invoice={item} 
+						          	biller={billers.find((i) => i._id === item.biller)} 
+						          	customer={customers.find((i) => i._id === item.customer)} /> : null}
 						        </a>
   					        &nbsp;&nbsp;&nbsp;
 						        <a href="" onClick={this.onRemove.bind(this, item._id)}>
@@ -53,8 +60,8 @@ export default class Invoices extends React.Component {
 						        </a>
 					        </td>
 				    			<td>{item.Id}</td>
-				    			<td>{item.biller}</td>
-				    			<td>{item.customer}</td>
+				    			<td>{item.billerName}</td>
+				    			<td>{item.customerName}</td>
 				    			<td>{item.issueDate.toString().slice(4, -24)}</td>
 				    			<td>{item.totalPrice}</td>
 				    		</tr>

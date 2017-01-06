@@ -15,17 +15,22 @@ body {
 .nav:link, .nav:visited {
 	margin: 5px;
 	margin-bottom: 15px;
-    background-color: #5F9EA0;
-    color: white;
-    padding: 14px 25px;
-    text-align: center; 
-    text-decoration: none;
-    display: inline-block;
+	background-color: #5F9EA0;
+	color: white;
+	padding: 14px 25px;
+	text-align: center; 
+	text-decoration: none;
+	display: inline-block;
 }
 
 .nav:hover, .nav:active {
-    background-color: #6495ED;
+	background-color: #6495ED;
 }
 .addcustomer {
-    align: center;
+	align: center;
+}
+
+.sort:hover, .sort:link, .sort:visited, .sort:active {
+	color: inherit;
+	text-decoration:none;
 }

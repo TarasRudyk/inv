@@ -18,9 +18,9 @@ import Customers from '/imports/ui/containers/pages/customers';
 import Addcustomer from '/imports/ui/containers/pages/addcustomer';
 
 FlowRouter.route('/', {
-  action() {
+  action(params, queryParams) {
     mount(MainLayout, {
-      content: <Invoices />
+      content: <Invoices {...queryParams}/>
     });
   }
 });

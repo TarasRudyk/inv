@@ -8,7 +8,6 @@ import { Billers } from './billers';
 Meteor.methods({
 
 createBiller(biller) {
-	console.log(biller)
 
 	const billerName = biller.billerName;
 	const address = biller.address;

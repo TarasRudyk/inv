@@ -44,7 +44,13 @@ Invoices.schema = new SimpleSchema({
   customer: {
     type: String,
   },
+  customerName: {
+    type: String,
+  },
   biller: {
+    type: String,
+  },
+  billerName: {
     type: String,
   },
   notes: {

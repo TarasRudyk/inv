@@ -1,7 +1,7 @@
 import React from 'react';
 import InlineCss from 'react-inline-css';
 
-export const PdfInvoice = ({ invoice }) => (
+export const PdfInvoice = ({ invoice, biller, customer }) => (
   <InlineCss stylesheet={`
       .PdfInvoice {
         font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
@@ -34,10 +34,10 @@ export const PdfInvoice = ({ invoice }) => (
         <hr />
       </div>
       <div>
-        <h6>Biller: {invoice.biller}</h6>
-        <h6>Biller: {invoice.biller}</h6>
+        <h6>Biller:{biller.billerName}</h6>
+        <h6>Customer: {customer.customerName}</h6>
       </div>
-      <h3>{ invoice.biller }</h3>
+      <h3>{ customer.customerName }</h3>
       <p>{ invoice.totalPrice }</p>
   
   </InlineCss>

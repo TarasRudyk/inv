@@ -5,6 +5,7 @@ import { check } from 'meteor/check';
 
 import { Invoices } from './invoice';
 import { Customers } from '/imports/api/customers/customers';
+import { Billers } from '/imports/api/billers/billers';
 import { PdfInvoice } from '/imports/ui/components/pdfdocument';
 import { generateComponentAsPDF } from './generate-pdf';
 
@@ -26,10 +27,12 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     const count = Invoices.find().count();
 
     const Id = count ? Invoices.findOne( {} , { sort: { Id: -1 } } ).Id + 1 : 1;
+    const customerName = Customers.findOne({_id: customer}).customerName;
+    const billerName = Billers.findOne({_id: biller}).billerName;
 
-    Invoices.insert({ items, totalPrice, notes, date, issueDate, dueDate, customer, biller, Id });
+    Invoices.insert({ items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName, Id });
 
-    const money = Customers.findOne({ customerName: customer }).total || 0;
+    const money = Customers.findOne({ _id: customer }).total || 0;
     const total = (Number(money) + Number(totalPrice)).toFixed(2).toString()
     Customers.update({customerName: customer}, { $set: { total } });
   },
@@ -49,9 +52,11 @@ export const downloadPdf = new ValidatedMethod({
   }).validator(),
   run({ id }) {
     const invoice = Invoices.findOne({ _id: id });
+    const biller = Billers.findOne({ _id: invoice.biller });
+    const customer = Customers.findOne({ _id: invoice.customer })
     const fileName = `invoice_${invoice.Id}.pdf`;
-    return generateComponentAsPDF({ component: PdfInvoice, props: { invoice }, fileName })
+    return generateComponentAsPDF({ component: PdfInvoice, props: { invoice, biller, customer }, fileName })
     .then((result) => result)
-    .catch((error) => { /*throw new Meteor.Error('500', error); */});
+    .catch((error) => { /*throw new Meteor.Error('500', error);*/ });
   },
 });

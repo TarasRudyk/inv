@@ -77,7 +77,7 @@ export default class Addinvoice extends React.Component {
                 <select className="form-control" ref="biller">
                   {
                     billers.map(item =>
-                      <option key={item._id} value={item.billerName}>{item.billerName}</option>
+                      <option key={item._id} value={item._id}>{item.billerName}</option>
                   )}
                 </select>
               </div>
@@ -89,7 +89,7 @@ export default class Addinvoice extends React.Component {
                 <select className="form-control" ref="customer">
                   {
                     customers.map(item =>
-                      <option key={item._id} value={item.customerName}>{item.customerName}</option>
+                      <option key={item._id} value={item._id}>{item.customerName}</option>
                   )}
                 </select>
               </div>
