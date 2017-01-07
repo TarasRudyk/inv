@@ -68,7 +68,7 @@ export default class Invoices extends React.Component {
 				    			<td>{item.billerName}</td>
 				    			<td>{item.customerName}</td>
 				    			<td>{item.issueDate.toString().slice(4, -24)}</td>
-				    			<td>{item.totalPrice}</td>
+				    			<td>{item.totalPrice}<span>&nbsp;Kč</span></td>
 				    		</tr>
 				    		))
 				    }

@@ -37,7 +37,7 @@ createCustomer(customer) {
     const customerContact = customer.customerContact;
     const address = customer.address;
     const contacts = customer.contacts;
-    const vat = customet.vat;
+    const vat = customer.vat;
     const notes = customer.notes;enabled;
     const enabled = Boolean(customer.enabled==='true' ? true : false);
 

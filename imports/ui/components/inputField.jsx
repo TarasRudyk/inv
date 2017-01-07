@@ -126,7 +126,7 @@ export default class InputField extends React.Component {
 	            </div>
 	          </div>
   		    </td>
-  		    <td className="col-sm-2"><h4><b>{ (this.state.itemPrice.reduce((a, b) => a + b, 0)).toFixed(2) }</b></h4></td>
+  		    <td className="col-sm-2"><h4><b>{(this.state.itemPrice.reduce((a, b) => a + b, 0)).toFixed(2)}<span>&nbsp;Kč</span></b></h4></td>
 	    	</tr>
 	    </tbody>
     );

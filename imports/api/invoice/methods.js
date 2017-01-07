@@ -33,8 +33,8 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     Invoices.insert({ items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName, Id });
 
     const money = Customers.findOne({ _id: customer }).total || 0;
-    const total = (Number(money) + Number(totalPrice)).toFixed(2).toString()
-    Customers.update({customerName: customer}, { $set: { total } });
+    const total = (Number(money) + Number(totalPrice)).toFixed(2).toString();
+    Customers.update({_id: customer}, { $set: { total } });
   },
 
   removeInvoice(id) {
