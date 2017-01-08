@@ -23,6 +23,7 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     const date = dates.date;
     const issueDate = dates.issueDate;
     const dueDate = dates.dueDate;
+    Number(totalPrice)
 
     const count = Invoices.find().count();
 
@@ -55,9 +56,11 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     const date = dates.date;
     const issueDate = dates.issueDate;
     const dueDate = dates.dueDate;
-    
+    Number(totalPrice)
+
     const customerName = Customers.findOne({_id: customer}).customerName;
     const billerName = Billers.findOne({_id: biller}).billerName;
+
 
     const query = { $set: { items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName } };
 

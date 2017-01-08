@@ -29,7 +29,8 @@ Invoices.schema = new SimpleSchema({
     type: String,
   },
   totalPrice: {
-    type: String, 
+    decimal: true,
+    type: Number, 
   },
   date: {
     type: Date(),

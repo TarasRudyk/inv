@@ -97,7 +97,7 @@ export default class Addinvoice extends React.Component {
               <div className="col-sm-6">
                 <select className="form-control" ref="biller">
                   { ObjLength ?
-                    <option defaultValue={invoice.biller}>{invoice.billerName}</option> : null
+                    <option value={invoice.biller} default>{invoice.billerName}</option> : null
                   }
                   {
                     billers.map(item =>
@@ -112,7 +112,7 @@ export default class Addinvoice extends React.Component {
               <div className="col-sm-6">
                 <select className="form-control" ref="customer">
                   { ObjLength ?
-                    <option defaultValue={invoice.customer}>{invoice.customerName}</option> : null
+                    <option value={invoice.customer} default>{invoice.customerName}</option> : null
                   }
                   {
                     customers.map(item =>
