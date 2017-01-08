@@ -60,6 +60,10 @@ export default class Invoices extends React.Component {
 						          	customer={customers.find((i) => i._id === item.customer)} /> : null}
 						        </a>
   					        &nbsp;&nbsp;&nbsp;
+						        <a href={`/addinvoice/${item._id}`}>
+						          <span className="fa fa-pencil"></span>
+						        </a>
+  					        &nbsp;&nbsp;&nbsp;
 						        <a href="" onClick={this.onRemove.bind(this, item._id)}>
 						          <span className="fa fa-trash" aria-hidden="true"></span>
 						        </a>

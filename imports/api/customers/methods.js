@@ -32,7 +32,7 @@ createCustomer(customer) {
     Customers.insert({customerName, customerContact, address, contacts, vat, notes, enabled, Id});
   },
 
- editCustomer(Id,customer) {
+ editCustomer(Id, customer) {
     const customerName = customer.customerName;
     const customerContact = customer.customerContact;
     const address = customer.address;

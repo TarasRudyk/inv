@@ -27,6 +27,18 @@ export const removeInvoice = (id) => {
 
 };	
 
+export const editInvoice = (id, items, totalPrice, notes, dates, customer, biller) => {
+
+	return Meteor.call('editInvoice', id, items, totalPrice, notes, dates, customer, biller, (err) => {
+		if(err) {
+			Bert.alert(err.reason + ' the invoice hasn\'t been edited', 'danger', 'fixed-top', 'fa-frown-o');
+		} else {
+			Bert.alert('The invoice has been edited successfully', 'success', 'fixed-top', 'fa-smile-o ');
+			FlowRouter.go('/')
+		}
+	})
+
+};	
 
 export const downloadPdf = (id) => {
 

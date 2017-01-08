@@ -36,7 +36,7 @@ FlowRouter.route('/addinvoice', {
 FlowRouter.route('/addinvoice/:id', {
   action(params) {
     mount(MainLayout, {
-      content: <AddInvoice {...params}/>
+      content: <Addinvoice {...params}/>
     });
   }
 });

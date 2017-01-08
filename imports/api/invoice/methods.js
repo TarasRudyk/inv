@@ -43,6 +43,28 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     Invoices.remove({_id: id})
   },
 
+  editInvoice(id, items, totalPrice, notes, dates, customer, biller) {
+
+    check(id, String);
+    check(dates, Object);
+    check(totalPrice, String);
+    check(notes, String);
+    check(customer, String);
+    check(biller, String);
+
+    const date = dates.date;
+    const issueDate = dates.issueDate;
+    const dueDate = dates.dueDate;
+    
+    const customerName = Customers.findOne({_id: customer}).customerName;
+    const billerName = Billers.findOne({_id: biller}).billerName;
+
+    const query = { $set: { items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName } };
+
+    Invoices.update({_id: id}, query);
+
+  }
+
 });
 
 export const downloadPdf = new ValidatedMethod({

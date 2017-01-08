@@ -6,6 +6,7 @@ export default class InputField extends React.Component {
     this.state = {
     	items: [],
     	itemPrice: [],
+      edit: this.props.edit
     }
 
     this.onAdd = this.onAdd.bind(this);
@@ -66,14 +67,28 @@ export default class InputField extends React.Component {
   	this.setState({ items });
   };
 
-
   render() {
   	const { products } = this.props;
-  	const { items, itemPrice } = this.state;
-  	this.props.invoice(items, itemPrice);
+  	const { items, itemPrice, edit } = this.state;
+    this.props.invoice(items, itemPrice);
 
     return (
     	<tbody>
+      {edit ?
+        edit.map((item, index) => 
+        <tr key={index}>
+          <td className="col-sm-2">
+            {item.quantity}
+          </td>
+          <td className="col-sm-4">
+            {item.product}
+          </td>
+          <td className="col-sm-4">
+            {item.price}
+          </td>
+        </tr>
+        )
+      : null}
     		{this.state.items.map( (item, index) => {
     			const ref = "item_" + index;
     			return(
