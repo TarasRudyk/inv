@@ -4,9 +4,7 @@ export default class InputField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	items: [],
-    	itemPrice: [],
-      edit: this.props.edit
+    	items: this.props.edit || [],
     }
 
     this.onAdd = this.onAdd.bind(this);
@@ -18,18 +16,10 @@ export default class InputField extends React.Component {
   	const price = product === 'Select Poduct' ? "0" : 
   		this.props.products.find((item) => item.description === product).unitPrice;
   	const quantity = this.state.items[index].quantity || 1;
+    const itemPrice = ((parseInt(quantity, 10) * parseFloat(price, 10) * 10) / 10).toFixed(2) || 0;  
   	const items = this.state.items;
-  	items.splice(index, 1, { quantity, price, product })
+  	items.splice(index, 1, { quantity, price, product, itemPrice })
   	this.setState({ items });
-
-  	const prices = this.state.itemPrice;
-  	const itemPrice = ((parseInt(quantity, 10) * parseFloat(price, 10) * 10) / 10) || 0;	
-  	if (prices.length) {
-  		prices.splice(index, 1, itemPrice);
-  	} else {
-  		prices.push(itemPrice);
-  	}
-  	this.setState({ itemPrice: prices });
   };
   
 
@@ -37,18 +27,10 @@ export default class InputField extends React.Component {
   	const quantity = this.refs['quantity-' + index].value || 1;
   	const price = this.state.items[index].price;
   	const product = this.state.items[index].product;
+    const itemPrice = ((parseInt(quantity, 10) * parseFloat(price, 10) * 10) / 10).toFixed(2) || 0;
   	const items = this.state.items;
-  	items.splice(index, 1, { quantity, price, product });
+  	items.splice(index, 1, { quantity, price, product, itemPrice });
   	this.setState({ items });
-
-  	const prices = this.state.itemPrice
-  	const itemPrice = ((parseInt(quantity, 10) * parseFloat(price, 10) * 10) / 10) || 0;	
-  	if (prices.length) {
-  		prices.splice(index, 1, itemPrice);
-  	} else {
-  		prices.push(itemPrice);
-  	}
-  	this.setState({ itemPrice: prices });
   }; 
 
 
@@ -69,44 +51,29 @@ export default class InputField extends React.Component {
 
   render() {
   	const { products } = this.props;
-  	const { items, itemPrice, edit } = this.state;
-    this.props.invoice(items, itemPrice);
+  	const { items } = this.state;
+    this.props.invoice(items);
 
     return (
     	<tbody>
-      {edit ?
-        edit.map((item, index) => 
-        <tr key={index}>
-          <td className="col-sm-2">
-            {item.quantity}
-          </td>
-          <td className="col-sm-4">
-            {item.product}
-          </td>
-          <td className="col-sm-4">
-            {item.price}
-          </td>
-        </tr>
-        )
-      : null}
-    		{this.state.items.map( (item, index) => {
+    		{items.map( (item, index) => {
     			const ref = "item_" + index;
     			return(
 				   	<tr id="item" key={index} >
 				      <td className="col-sm-2">
-				        <input className="form-control col-sm-3" type="number" defaultValue="1" 
+				        <input className="form-control col-sm-3" type="number" defaultValue={item.quantity || '1'} 
 				          ref={`quantity-${index}`} onChange={this.handleQuantity.bind(this, index)} min='1' />
 				      </td>
 				      <td className="col-sm-4">
 				        <select className="form-control" ref={`select-${index}`} onChange={this.handleSelect.bind(this, index)}>
-				          <option defaultValue="Select product">Select Poduct</option>
+				          <option defaultValue={item.product || 'Select product'}>{item.product || 'Select product'}</option>
 				          {products.map(item =>
 				            <option key={item._id} value={item.description}>{item.description}</option>
 				          )}
 				        </select>
 				      </td>
 				      <td className="col-sm-2">
-				      	<h5>{this.state.items[index].price || 0}</h5>
+				      	<h5>{items[index].price || 0}</h5>
 				      </td>
 				    </tr>
 					)
@@ -141,7 +108,12 @@ export default class InputField extends React.Component {
 	            </div>
 	          </div>
   		    </td>
-  		    <td className="col-sm-2"><h4><b>{(this.state.itemPrice.reduce((a, b) => a + b, 0)).toFixed(2)}<span>&nbsp;Kč</span></b></h4></td>
+  		    <td className="col-sm-2">
+            <h4>
+              {((items.map((item) => parseFloat(item.itemPrice, 10) * 10/10)).reduce((a, b)  => a + b, 0).toFixed(2)) || 0}
+              <b><span>&nbsp;Kč</span></b>
+            </h4>
+          </td>
 	    	</tr>
 	    </tbody>
     );

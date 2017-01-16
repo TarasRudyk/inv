@@ -39,18 +39,15 @@ export default class Addinvoice extends React.Component {
     this.setState({ dueDate: date })
   }
 
-  getItem(items, prices) {
-    const totalPrice  = (prices.reduce((a, b) => a + b, 0)).toFixed(2);
+  getItem(items) {
     const itemsArr = this.state.items;
     getLocalState().set('items', items);
-    getLocalState().set('totalPrice', totalPrice);
   }
 
   onSubmit(e) {
     e.preventDefault();
 
     const items = getLocalState().get('items');
-    const totalPrice = getLocalState().get('totalPrice');
     const notes = this.refs.notes.value.trim();
     const dates = {
       date: this.state.date ? this.state.date._d : null,
@@ -60,7 +57,7 @@ export default class Addinvoice extends React.Component {
     const customer = this.refs.customer.value;
     const biller = this.refs.biller.value;
 
-    createInvoice(items, totalPrice, notes, dates, customer, biller);
+    createInvoice(items, notes, dates, customer, biller);
   }
 
   onEdit(e) {
@@ -68,7 +65,6 @@ export default class Addinvoice extends React.Component {
 
     const id = this.state.invoice._id
     const items = getLocalState().get('items');
-    const totalPrice = getLocalState().get('totalPrice');
     const notes = this.refs.notes.value.trim();
     const dates = {
       date: this.state.date ? this.state.date._d : null,
@@ -78,13 +74,13 @@ export default class Addinvoice extends React.Component {
     const customer = this.refs.customer.value;
     const biller = this.refs.biller.value;
 
-    editInvoice(id, items, totalPrice, notes, dates, customer, biller)
+    editInvoice(id, items, notes, dates, customer, biller)
   }
 
   render() {
 
     const { billers, customers, products } = this.props;
-    const { invoice } = this.state;
+    const { invoice, items } = this.state;
     const ObjLength = invoice ? Object.keys(invoice).length : null; 
 
     return (
@@ -170,7 +166,7 @@ export default class Addinvoice extends React.Component {
                     <InputField  products={this.props.products} invoice={this.getItem} edit={invoice.items} /> :
                     <InputField  products={this.props.products} invoice={this.getItem} />
                   }
-                     {this.state.items.map((inputField) => inputField)}
+                     {items.map((inputField) => inputField)}
                 </table>
               </div>
             </div>

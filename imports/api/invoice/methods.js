@@ -12,10 +12,9 @@ import { generateComponentAsPDF } from './generate-pdf';
 
 Meteor.methods({
 
-createInvoice(items, totalPrice, notes, dates, customer, biller) {
+createInvoice(items, notes, dates, customer, biller) {
 
     check(dates, Object)
-    check(totalPrice, String);
     check(notes, String);
     check(customer, String);
     check(biller, String);
@@ -23,7 +22,7 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     const date = dates.date;
     const issueDate = dates.issueDate;
     const dueDate = dates.dueDate;
-    Number(totalPrice)
+    const totalPrice = ((items.map((item) => parseFloat(item.itemPrice, 10) * 10/10)).reduce((a, b)  => a + b, 0).toFixed(2));
 
     const count = Invoices.find().count();
 
@@ -44,11 +43,10 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     Invoices.remove({_id: id})
   },
 
-  editInvoice(id, items, totalPrice, notes, dates, customer, biller) {
+  editInvoice(id, items, notes, dates, customer, biller) {
 
     check(id, String);
     check(dates, Object);
-    check(totalPrice, String);
     check(notes, String);
     check(customer, String);
     check(biller, String);
@@ -56,7 +54,7 @@ createInvoice(items, totalPrice, notes, dates, customer, biller) {
     const date = dates.date;
     const issueDate = dates.issueDate;
     const dueDate = dates.dueDate;
-    Number(totalPrice)
+    const totalPrice = ((items.map((item) => parseFloat(item.itemPrice, 10) * 10/10)).reduce((a, b)  => a + b, 0).toFixed(2));
 
     const customerName = Customers.findOne({_id: customer}).customerName;
     const billerName = Billers.findOne({_id: biller}).billerName;

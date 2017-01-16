@@ -4,9 +4,9 @@ import { base64ToBlob } from './base64-to-blob.js';
 import fileSaver from 'file-saver';
 import './methods';
 
-export const createInvoice = (items, totalPrice, notes, dates, customer, biller) => {
+export const createInvoice = (items, notes, dates, customer, biller) => {
 
-	return Meteor.call('createInvoice', items, totalPrice, notes, dates, customer, biller, (err) => {
+	return Meteor.call('createInvoice', items, notes, dates, customer, biller, (err) => {
 		if(err) {
 			Bert.alert(err.reason + ' the invoice hasn\'t been added', 'danger', 'fixed-top', 'fa-frown-o');
 		}else{
@@ -27,9 +27,9 @@ export const removeInvoice = (id) => {
 
 };	
 
-export const editInvoice = (id, items, totalPrice, notes, dates, customer, biller) => {
+export const editInvoice = (id, items, notes, dates, customer, biller) => {
 
-	return Meteor.call('editInvoice', id, items, totalPrice, notes, dates, customer, biller, (err) => {
+	return Meteor.call('editInvoice', id, items, notes, dates, customer, biller, (err) => {
 		if(err) {
 			Bert.alert(err.reason + ' the invoice hasn\'t been edited', 'danger', 'fixed-top', 'fa-frown-o');
 		} else {
