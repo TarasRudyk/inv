@@ -17,7 +17,7 @@ export default class InputField extends React.Component {
   	const product = this.refs['select-' + index].value;
   	const price = product === 'Select Poduct' ? "0" : 
   		this.props.products.find((item) => item.description === product).unitPrice;
-  	const quantity = this.state.items[index].quantity;
+  	const quantity = this.state.items[index].quantity || 1;
   	const items = this.state.items;
   	items.splice(index, 1, { quantity, price, product })
   	this.setState({ items });
@@ -34,7 +34,7 @@ export default class InputField extends React.Component {
   
 
   handleQuantity(index) {
-  	const quantity = this.refs['quantity-' + index].value;
+  	const quantity = this.refs['quantity-' + index].value || 1;
   	const price = this.state.items[index].price;
   	const product = this.state.items[index].product;
   	const items = this.state.items;
@@ -94,8 +94,8 @@ export default class InputField extends React.Component {
     			return(
 				   	<tr id="item" key={index} >
 				      <td className="col-sm-2">
-				        <input className="form-control col-sm-3" type="number" defaultValue="0" 
-				          ref={`quantity-${index}`} onChange={this.handleQuantity.bind(this, index)} min='0' />
+				        <input className="form-control col-sm-3" type="number" defaultValue="1" 
+				          ref={`quantity-${index}`} onChange={this.handleQuantity.bind(this, index)} min='1' />
 				      </td>
 				      <td className="col-sm-4">
 				        <select className="form-control" ref={`select-${index}`} onChange={this.handleSelect.bind(this, index)}>
