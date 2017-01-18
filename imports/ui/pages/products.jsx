@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import {removeProduct} from '/imports/api/products/actions';
 
 export default class Products extends React.Component {
@@ -15,6 +16,13 @@ export default class Products extends React.Component {
   	}
   }
 
+  handleSorting (sorted) {
+  	this.state.sortToggle === 1 ? this.setState({ sortToggle: -1 }) : this.setState({ sortToggle: 1 });
+  	let sortToggle = this.state.sortToggle
+
+  	FlowRouter.setQueryParams({ sorted, sortToggle });
+  }
+
   render() {
   	const { products } = this.props;
     return (
@@ -24,9 +32,9 @@ export default class Products extends React.Component {
 				    <thead>
 				      <tr>
 				        <th>Action</th>
-				        <th>ID</th>
-				        <th>Description</th>
-				        <th>Unit Price</th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'Id')}>ID</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'description')}>Description</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'unitPrice')}>Unit Price</a></th>
 				        <th>Enabled</th>
 				      </tr>
 				    </thead>

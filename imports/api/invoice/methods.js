@@ -33,7 +33,7 @@ createInvoice(items, notes, dates, customer, biller) {
     Invoices.insert({ items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName, Id });
 
     const money = Customers.findOne({ _id: customer }).total || 0;
-    const total = (Number(money) + Number(totalPrice)).toFixed(2).toString();
+    const total = (Number(money) + Number(totalPrice)).toFixed(2);
     Customers.update({_id: customer}, { $set: { total } });
   },
 
@@ -63,6 +63,10 @@ createInvoice(items, notes, dates, customer, biller) {
     const query = { $set: { items, totalPrice, notes, date, issueDate, dueDate, customer, biller, customerName, billerName } };
 
     Invoices.update({_id: id}, query);
+
+    const money = Customers.findOne({ _id: customer }).total || 0;
+    const total = (Number(money) + Number(totalPrice)).toFixed(2);
+    Customers.update({_id: customer}, { $set: { total } });
 
   }
 

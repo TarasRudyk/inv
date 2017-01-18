@@ -15,6 +15,13 @@ export default class Billers extends React.Component {
   	}
   }
 
+  handleSorting (sorted) {
+  	this.state.sortToggle === 1 ? this.setState({ sortToggle: -1 }) : this.setState({ sortToggle: 1 });
+  	let sortToggle = this.state.sortToggle
+
+  	FlowRouter.setQueryParams({ sorted, sortToggle });
+  }
+
   render() {
   	const { billers } = this.props;
 		return (
@@ -24,8 +31,8 @@ export default class Billers extends React.Component {
 				    <thead>
 				      <tr>
 				        <th>Actions</th>
-				        <th>ID</th>
-				        <th>Name</th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'Id')}>ID</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'billerName')}>Name</a></th>
 				        <th>e-mail</th>
 				        <th>Enabled</th>
 				      </tr>

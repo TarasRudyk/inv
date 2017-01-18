@@ -41,7 +41,7 @@ export default class Invoices extends React.Component {
 				    <thead>
 				      <tr>
 				        <th>Actions</th>
-				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'Id', this.state.sortToggle)}>ID</a></th>
+				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'Id')}>ID</a></th>
 				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'billerName')}>Biller</a></th>
 				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'customerName')}>Customer</a></th>
 				        <th><a href="" className="sort" onClick={this.handleSorting.bind(this, 'issueDate')}>Date</a></th>

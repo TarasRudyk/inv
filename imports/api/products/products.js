@@ -17,7 +17,8 @@ Products.schema = new SimpleSchema({
     type: String,
   },
   unitPrice: {
-    type: String
+    decimal: true,
+    type: Number, 
   },
   cost: {
     type: String,

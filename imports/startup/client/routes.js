@@ -42,9 +42,9 @@ FlowRouter.route('/addinvoice/:id', {
 });
 
 FlowRouter.route('/billers', {
-  action() {
+  action(params, queryParams) {
     mount(MainLayout, {
-      content: <Billers />
+      content: <Billers {...queryParams}/>
     });
   }
 });
@@ -66,9 +66,9 @@ FlowRouter.route('/billers/addbiller/:id', {
 });
 
 FlowRouter.route('/products', {
-  action() {
+  action(params, queryParams) {
     mount(MainLayout, {
-      content: <Products />
+      content: <Products {...queryParams}/>
     });
   }
 });
@@ -90,9 +90,9 @@ FlowRouter.route('/products/addproduct/:id', {
 });
 
 FlowRouter.route('/customers', {
-  action() {
+  action(params, queryParams) {
     mount(MainLayout, {
-      content: <Customers />
+      content: <Customers {...queryParams}/>
     });
   }
 });

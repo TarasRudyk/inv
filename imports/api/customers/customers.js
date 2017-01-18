@@ -78,7 +78,8 @@ Customers.schema = new SimpleSchema({
     }
   },
   total: {
-    type: String,
+    decimal: true,
+    type: Number,
     optional: true
   },
   enabled: {
