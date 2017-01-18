@@ -43,9 +43,9 @@ export default class InputField extends React.Component {
   	this.setState({ items });
   };
 
-  onRemove() {
+  onRemove(index) {
   	const items = this.state.items;
-  	items.splice(items.length-1, 1);
+  	items.splice(index, 1 );
   	this.setState({ items });
   };
 
@@ -56,6 +56,7 @@ export default class InputField extends React.Component {
 
     return (
     	<tbody>
+
     		{items.map( (item, index) => {
     			const ref = "item_" + index;
     			return(
@@ -72,9 +73,14 @@ export default class InputField extends React.Component {
 				          )}
 				        </select>
 				      </td>
-				      <td className="col-sm-2">
+				      <td className="col-sm-1">
 				      	<h5>{items[index].price || 0}</h5>
 				      </td>
+              <td className="col-sm-1">
+              <a href="" onClick={this.onRemove.bind(this, index)}>
+                  <span className="fa fa-trash" aria-hidden="true"></span>
+                </a>
+              </td>
 				    </tr>
 					)
     		})}
@@ -82,33 +88,19 @@ export default class InputField extends React.Component {
 		    <tr>
 		    	<td className="col-sm-2"></td>
 		    	<td className="col-sm-4">
-	          <div className="form-group buttons">
-	            <div className="col-sm-3"></div>
-	            <div className="col-sm-3">
-	              <a href="" onClick={this.onAdd}>
-	                <span className="fa fa-plus" aria-hidden="true"></span>
-	              </a>
-	            </div>
-	            <div className="col-sm-3">
-	              <a href="" onClick={this.onRemove}>
-	                <span className="fa fa-minus" aria-hidden="true"></span>
-	              </a>
-	            </div>
-	          </div>
+            <a href="" onClick={this.onAdd}>
+              <span className="fa fa-plus" aria-hidden="true"></span>
+            </a>
   		    </td>
-  		    <td className="col-sm-2"></td>
+  		    <td className="col-sm-4"></td>
 	    	</tr>
+
 		    <tr>
 		    	<td className="col-sm-2"></td>
 		    	<td className="col-sm-4">
-	          <div className="form-group buttons">
-	            <div className="col-sm-3"></div>
-	            <div className="col-sm-6">
-	             <h5><b>Total price:</b></h5>
-	            </div>
-	          </div>
+	           <h5><b>Total price:</b></h5>
   		    </td>
-  		    <td className="col-sm-2">
+  		    <td className="col-sm-4">
             <h4>
               {((items.map((item) => parseFloat(item.itemPrice, 10) * 10/10)).reduce((a, b)  => a + b, 0).toFixed(2)) || 0}
               <b><span>&nbsp;Kč</span></b>

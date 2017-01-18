@@ -154,7 +154,7 @@ export default class Addinvoice extends React.Component {
             <div className="form-group"> 
             <div className="col-sm-1"></div>
               <div className="col-sm-10">
-                <table className="table">
+                <table className="table col-sm-10">
                   <thead>
                     <tr>
                       <th>Quantity</th>
@@ -166,7 +166,6 @@ export default class Addinvoice extends React.Component {
                     <InputField  products={this.props.products} invoice={this.getItem} edit={invoice.items} /> :
                     <InputField  products={this.props.products} invoice={this.getItem} />
                   }
-                     {items.map((inputField) => inputField)}
                 </table>
               </div>
             </div>
